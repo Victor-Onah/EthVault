@@ -4,6 +4,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { AppContext } from "../../App";
 import { CgSpinner } from "react-icons/cg";
 import Header from "../../components/header";
+import { Helmet } from "react-helmet";
 
 const DashboardLayout = () => {
 	const [loadState, setLoadState] = useState("pending");
@@ -59,6 +60,10 @@ const DashboardLayout = () => {
 			)}
 			{loadState === "failed" && (
 				<div className="min-h-screen flex items-center justify-center p-4">
+					<Helmet>
+						<title>Error</title>
+						<meta name="description" content="" />
+					</Helmet>
 					<div className="bg-red-700 bg-opacity-20 backdrop-blur-md border border-slate-300 p-4 rounded-lg text-center space-y-4 text-sm w-full max-w-80">
 						<h1 className="text-2xl font-bold">Oops!</h1>
 						<div className="text-4xl flex justify-center">
@@ -75,6 +80,10 @@ const DashboardLayout = () => {
 			)}
 			{loadState === "pending" && (
 				<div className="min-h-screen flex items-center justify-center p-4">
+					<Helmet>
+						<title>Loading...</title>
+						<meta name="description" content="" />
+					</Helmet>
 					<div className="bg-white bg-opacity-20 backdrop-blur-md border border-slate-300 p-4 rounded-lg text-center space-y-4 text-sm w-full max-w-80">
 						<h1 className="text-2xl font-bold">Please wait...</h1>
 						<div className="text-4xl flex justify-center">
