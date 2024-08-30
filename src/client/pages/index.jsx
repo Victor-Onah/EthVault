@@ -6,14 +6,18 @@ import { CgSpinner } from "react-icons/cg";
 import { Helmet } from "react-helmet";
 import { toast } from "sonner";
 import Logo from "../components/logo";
+import { useState } from "react";
+import { ImCheckboxChecked, ImCheckboxUnchecked } from "react-icons/im";
 
 const Index = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors, isSubmitting }
+		formState: { errors, isSubmitting, isValid }
 	} = useForm({ mode: "onBlur" });
 	const navigate = useNavigate();
+
+	const [agree, setAgree] = useState(false);
 
 	const handleSignUp = async form => {
 		try {
@@ -131,7 +135,26 @@ const Index = () => {
 							required={true}
 							placeholder={"P@ssw0rd"}
 						/>
-						<SubmitBtn disabled={isSubmitting}>
+						<div className="flex text-sm gap-4 items-center">
+							<button
+								type="button"
+								className="text-lg"
+								onClick={() => setAgree(!agree)}>
+								{agree ? (
+									<ImCheckboxChecked />
+								) : (
+									<ImCheckboxUnchecked />
+								)}
+							</button>
+							<span onClick={() => setAgree(!agree)}>
+								By checking this box you agree to our{" "}
+								<Link className="underline">
+									Terms and Conditions
+								</Link>
+							</span>
+						</div>
+						<SubmitBtn
+							disabled={!agree || !isValid || isSubmitting}>
 							{isSubmitting ? (
 								<CgSpinner className="animate-spin" />
 							) : (
