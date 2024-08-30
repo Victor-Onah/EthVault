@@ -10,6 +10,7 @@ import DashboardLayout from "./pages/dashboard/layout";
 import Transactions from "./pages/dashboard/transactions";
 import TermsAndConditions from "./pages/terms";
 import PrivacyPolicy from "./pages/privacy";
+import Logout from "./pages/dashboard/logout";
 
 export const AppContext = createContext(null);
 
@@ -50,6 +51,7 @@ function App() {
 							path="/dashboard/transactions"
 							element={<Transactions />}
 						/>
+						<Route path="/dashboard/logout" element={<Logout />} />
 					</Route>
 					<Route path="/terms" element={<TermsAndConditions />} />
 					<Route path="/privacy" element={<PrivacyPolicy />} />

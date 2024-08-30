@@ -70,6 +70,17 @@ app.get("/api/user", async (req, res) => {
 	}
 });
 
+app.get("/api/user/logout", async (req, res) => {
+	res.cookie("auth", null, {
+		maxAge: 0,
+		secure: true,
+		httpOnly: true,
+		path: "/"
+	});
+
+	res.end();
+});
+
 ViteExpress.listen(app, 3000, async () => {
 	try {
 		await connect(process.env.DB_URL);
