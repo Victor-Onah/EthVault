@@ -18,7 +18,7 @@ const PrivacyPolicy = () => {
 						<h2 className="text-lg font-semibold">
 							1. Introduction
 						</h2>
-						<p>
+						<p className="my-4">
 							Welcome to EthVault. Your privacy is important to
 							us. This Privacy Policy explains how we collect,
 							use, disclose, and safeguard your information when
@@ -30,7 +30,9 @@ const PrivacyPolicy = () => {
 						<h2 className="text-lg font-semibold">
 							2. Information We Collect
 						</h2>
-						<p>We may collect the following information:</p>
+						<p className="my-4">
+							We may collect the following information:
+						</p>
 						<ul className="list-inside list-disc">
 							<li>
 								Personal Identification Information: Name, email
@@ -55,7 +57,7 @@ const PrivacyPolicy = () => {
 						<h2 className="text-lg font-semibold">
 							3. How We Use Your Information
 						</h2>
-						<p>
+						<p className="my-4">
 							We use your information for the following purposes:
 						</p>
 						<ul className="list-inside list-disc">
@@ -78,7 +80,7 @@ const PrivacyPolicy = () => {
 						<h2 className="text-lg font-semibold">
 							4. How We Share Your Information
 						</h2>
-						<p>
+						<p className="my-4">
 							We may share your information in the following
 							situations:
 						</p>
@@ -105,7 +107,7 @@ const PrivacyPolicy = () => {
 						<h2 className="text-lg font-semibold">
 							5. Security of Your Information
 						</h2>
-						<p>
+						<p className="my-4">
 							We implement security measures to protect your
 							information. However, no method of transmission over
 							the internet or electronic storage is completely
@@ -117,7 +119,7 @@ const PrivacyPolicy = () => {
 						<h2 className="text-lg font-semibold">
 							6. Your Rights and Choices
 						</h2>
-						<p>You have the right to:</p>
+						<p className="my-4">You have the right to:</p>
 						<ul className="list-inside list-disc">
 							<li>
 								Access and update your personal information.
@@ -136,7 +138,7 @@ const PrivacyPolicy = () => {
 						<h2 className="text-lg font-semibold">
 							7. Changes to This Privacy Policy
 						</h2>
-						<p>
+						<p className="my-4">
 							We may update this Privacy Policy from time to time.
 							Any changes will be posted on this page with an
 							updated effective date. Your continued use of our
@@ -147,12 +149,12 @@ const PrivacyPolicy = () => {
 
 					<section className="mb-6">
 						<h2 className="text-lg font-semibold">8. Contact Us</h2>
-						<p>
+						<p className="my-4">
 							If you have any questions about this Privacy Policy
 							or our practices, please contact us at:
 						</p>
 						<address>
-							<p>Email: support@ethvault.com</p>
+							<p className="my-4">Email: support@ethvault.com</p>
 						</address>
 					</section>
 				</div>

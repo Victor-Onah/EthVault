@@ -13,7 +13,7 @@ const TermsAndConditions = () => {
 					<strong>Last Updated:</strong> 9th September, 2023
 				</p>
 
-				<p>
+				<p className="my-4">
 					Welcome to EthVault. By accessing or using our platform, you
 					agree to comply with and be bound by the following terms and
 					conditions. Please read them carefully before using our
@@ -23,7 +23,7 @@ const TermsAndConditions = () => {
 				<h2 className="text-lg font-semibold mt-6">
 					1. Acceptance of Terms
 				</h2>
-				<p>
+				<p className="my-4">
 					By creating an account or using our services, you agree to
 					these Terms, our Privacy Policy, and any other policies or
 					guidelines provided by us. If you do not agree with any part
@@ -33,7 +33,7 @@ const TermsAndConditions = () => {
 				<h2 className="text-lg font-semibold mt-6">
 					2. Services Provided
 				</h2>
-				<p>
+				<p className="my-4">
 					EthVault provides a platform for users to store, transfer,
 					and manage their Ethereum cryptocurrency. We do not engage
 					in trading activities. Our services include:
@@ -53,7 +53,7 @@ const TermsAndConditions = () => {
 				<h2 className="text-lg font-semibold mt-6">
 					3. User Account Requirements
 				</h2>
-				<p>To use our platform, you must:</p>
+				<p className="my-4">To use our platform, you must:</p>
 				<ul>
 					<li>
 						Provide accurate and complete information, including
@@ -72,7 +72,7 @@ const TermsAndConditions = () => {
 				<h2 className="text-lg font-semibold mt-6">
 					4. Ethereum Storage and Transfers
 				</h2>
-				<p>
+				<p className="my-4">
 					<strong>Minimum Balance:</strong> To receive Ethereum from
 					other accounts on our platform, your account must have a
 					minimum balance of 0.1 Ethereum.
@@ -86,7 +86,7 @@ const TermsAndConditions = () => {
 				</p>
 
 				<h2 className="text-lg font-semibold mt-6">5. Security</h2>
-				<p>
+				<p className="my-4">
 					We implement security measures to protect your data and
 					Ethereum. However, you are responsible for:
 				</p>
@@ -104,7 +104,7 @@ const TermsAndConditions = () => {
 				<h2 className="text-lg font-semibold mt-6">
 					6. User Responsibilities
 				</h2>
-				<p>
+				<p className="my-4">
 					<strong>Accuracy of Information:</strong> Ensure that all
 					information provided to us is accurate and up-to-date.
 					<br />
@@ -116,7 +116,7 @@ const TermsAndConditions = () => {
 				<h2 className="text-lg font-semibold mt-6">
 					7. Prohibited Activities
 				</h2>
-				<p>You agree not to:</p>
+				<p className="my-4">You agree not to:</p>
 				<ul>
 					<li>
 						Use our platform for any illegal activities or to
@@ -131,7 +131,7 @@ const TermsAndConditions = () => {
 				<h2 className="text-lg font-semibold mt-6">
 					8. Limitation of Liability
 				</h2>
-				<p>
+				<p className="my-4">
 					EthVault is not liable for any loss or damage arising from:
 				</p>
 				<ul>
@@ -147,7 +147,7 @@ const TermsAndConditions = () => {
 				<h2 className="text-lg font-semibold mt-6">
 					9. Changes to Terms
 				</h2>
-				<p>
+				<p className="my-4">
 					We may update these Terms from time to time. We will notify
 					you of any significant changes. Your continued use of our
 					platform after changes are made constitutes your acceptance
@@ -155,7 +155,7 @@ const TermsAndConditions = () => {
 				</p>
 
 				<h2 className="text-lg font-semibold mt-6">10. Termination</h2>
-				<p>
+				<p className="my-4">
 					We may suspend or terminate your account if you breach these
 					Terms or if we determine that your account poses a risk to
 					our platform. You may also terminate your account by
@@ -165,7 +165,7 @@ const TermsAndConditions = () => {
 				<h2 className="text-lg font-semibold mt-6">
 					13. Entire Agreement
 				</h2>
-				<p>
+				<p className="my-4">
 					These Terms, together with our Privacy Policy and any other
 					agreements or policies referenced herein, constitute the
 					entire agreement between you and EthVault regarding your use
