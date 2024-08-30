@@ -4,6 +4,7 @@ import { PiHandWavingDuotone } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../App";
 import { useContext } from "react";
+import { Helmet } from "react-helmet";
 
 const transactionsHistory = [
 	{
@@ -50,6 +51,10 @@ const Dashboard = () => {
 	return (
 		<>
 			<section className="p-4 space-y-2">
+				<Helmet>
+					<title>Dashboard - EthVault</title>
+					<meta name="description" content="" />
+				</Helmet>
 				<div>
 					<h1 className="text-xl font-bold flex items-center gap-2">
 						Hi {state.user.name.split(" ")[0]}{" "}
