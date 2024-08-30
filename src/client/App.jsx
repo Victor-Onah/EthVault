@@ -7,6 +7,7 @@ import { Toaster } from "sonner";
 import Receive from "./pages/dashboard/receive";
 import { createContext, useReducer } from "react";
 import DashboardLayout from "./pages/dashboard/layout";
+import Transactions from "./pages/dashboard/transactions";
 
 export const AppContext = createContext(null);
 
@@ -42,6 +43,10 @@ function App() {
 						<Route
 							path="/dashboard/receive"
 							element={<Receive />}
+						/>
+						<Route
+							path="/dashboard/transactions"
+							element={<Transactions />}
 						/>
 					</Route>
 				</Routes>
