@@ -29,12 +29,12 @@ const Header = () => {
 							className="p-2 rounded-lg bg-white bg-opacity-20 flex gap-4 items-center">
 							<BiUser /> Profile
 						</Link>
-						<Link
-							to={"/dashboard/support"}
+						<a
+							href={"mailto:support@ethvault.com"}
 							onClick={() => setIsMenuOpen(false)}
 							className="p-2 rounded-lg bg-white bg-opacity-20 flex gap-4 items-center">
 							<BiSupport /> Support
-						</Link>
+						</a>
 						<hr />
 						<Link
 							to={"/dashboard/logout"}
