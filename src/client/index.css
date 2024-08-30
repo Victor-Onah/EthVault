@@ -17,7 +17,8 @@
 .auth {
 	background-image: linear-gradient(rgba(0, 0, 70, 0.5), rgba(0, 0, 70, 0.5)),
 		url("../client/assets/images/bg.jpg");
-	background-size: 100% 100%;
+	background-size: 99.9% 99.9%;
 	background-position: center center;
 	background-attachment: fixed;
+	background-repeat: no-repeat;
 }
