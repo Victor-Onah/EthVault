@@ -18,7 +18,7 @@ const Transactions = () => {
 				<p className="text-sm">View your past transactions.</p>
 			</div>
 			<div className="text-sm space-y-2">
-				{state.user.transactions ? (
+				{state.user.transactions.length > 0 ? (
 					state.user.transactions.map((transaction, index) => (
 						<Link
 							key={index}

@@ -65,7 +65,7 @@ const Dashboard = () => {
 					</Link>
 				</div>
 				<div className="text-sm space-y-2">
-					{state.user.transactions ? (
+					{state.user.transactions.length > 0 ? (
 						state.user.transactions
 							.slice(0, 7)
 							.map((transaction, index) => (
