@@ -1,13 +1,17 @@
 import { useContext, useEffect, useState } from "react";
-import { BiMenu, BiSad } from "react-icons/bi";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { BiSad } from "react-icons/bi";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { AppContext } from "../../App";
 import { CgSpinner } from "react-icons/cg";
+import Header from "../../components/header";
 
 const DashboardLayout = () => {
 	const [loadState, setLoadState] = useState("pending");
 	const { dispatch } = useContext(AppContext);
 	const navigate = useNavigate();
+	const location = useLocation();
+
+	useEffect(() => window.scrollTo({ top: 0 }), [location]);
 
 	useEffect(() => {
 		(async () => {
@@ -40,18 +44,7 @@ const DashboardLayout = () => {
 		<main className="auth bg-blue-900 text-white">
 			{loadState === "done" && (
 				<div className="max-w-3xl m-auto flex flex-col  min-h-screen">
-					<header className="sticky top-2 p-2 z-50">
-						<div className="flex justify-between items-center bg-white bg-opacity-10 p-4 rounded-full text-sm backdrop-blur-md">
-							<div>
-								<h3 className="font-black">EthVault</h3>
-							</div>
-							<div>
-								<button>
-									<BiMenu />
-								</button>
-							</div>
-						</div>
-					</header>
+					<Header />
 					<Outlet />
 					<div className="flex gap-4 items-center justify-center px-4 py-8 text-xs">
 						<Link to={"/sign-in"} className="underline">
