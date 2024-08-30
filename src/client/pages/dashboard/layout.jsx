@@ -47,11 +47,11 @@ const DashboardLayout = () => {
 					<Header />
 					<Outlet />
 					<div className="flex gap-4 items-center justify-center px-4 py-8 text-xs">
-						<Link to={"/sign-in"} className="underline">
+						<Link to={"/terms"} className="underline">
 							Terms
 						</Link>{" "}
 						|
-						<Link to={"/sign-in"} className="underline">
+						<Link to={"/privacy"} className="underline">
 							Privacy policy
 						</Link>
 					</div>

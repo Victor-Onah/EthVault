@@ -116,11 +116,11 @@ const SignIn = () => {
 					</Link>
 				</p>
 				<p className="flex gap-4 items-center justify-center">
-					<Link to={"/sign-in"} className="underline">
+					<Link to={"/terms"} className="underline">
 						Terms
 					</Link>{" "}
 					|
-					<Link to={"/sign-in"} className="underline">
+					<Link to={"/privacy"} className="underline">
 						Privacy policy
 					</Link>
 				</p>
