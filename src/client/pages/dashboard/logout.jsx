@@ -48,7 +48,7 @@ const Logout = () => {
 								<CgSpinner />
 							</span>
 						</div>
-						<p>We're loading your dashboard</p>
+						<p>We're logging you out</p>
 					</div>
 				</div>
 			)}
