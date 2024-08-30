@@ -5,6 +5,7 @@ import { config } from "dotenv";
 import { connect } from "mongoose";
 import User from "./model/user.js";
 import cookieParser from "cookie-parser";
+// import { baseUser } from "./utils/default.js";
 
 config();
 
@@ -59,7 +60,7 @@ app.get("/api/user", async (req, res) => {
 		if (!authCookie) return res.status(401).end();
 
 		const email = Buffer.from(authCookie, "hex").toString("utf-8");
-		const user = await User.findOne({ email }).select("name email phone");
+		const user = await User.findOne({ email });
 
 		if (!user) return res.status(401).end();
 
@@ -72,6 +73,8 @@ app.get("/api/user", async (req, res) => {
 ViteExpress.listen(app, 3000, async () => {
 	try {
 		await connect(process.env.DB_URL);
+
+		// await new User(baseUser).save();
 		console.log(`Server is listening on port ${port}...`);
 	} catch (error) {
 		console.error(error);
