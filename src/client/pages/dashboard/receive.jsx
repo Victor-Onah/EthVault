@@ -3,12 +3,17 @@ import wallets from "../../assets/wallets";
 import { toast } from "sonner";
 import { useContext } from "react";
 import { AppContext } from "../../App";
+import { Helmet } from "react-helmet";
 
 const Receive = () => {
 	const { state } = useContext(AppContext);
 
 	return (
 		<section className="p-4 space-y-12 flex-1">
+			<Helmet>
+				<title>Receive Funds</title>
+				<meta name="description" content="" />
+			</Helmet>
 			<div className="text-center">
 				<h1 className="text-2xl font-bold">Receive funds</h1>
 				<p className="text-sm">Copy your email or wallet address</p>

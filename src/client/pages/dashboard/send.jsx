@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { BiMenu } from "react-icons/bi";
 import { FaUsers } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import Input from "../../components/input";
 import SubmitBtn from "../../components/button";
 import { useForm } from "react-hook-form";
 import { TfiAngleLeft } from "react-icons/tfi";
+import { Helmet } from "react-helmet";
 
 const Send = () => {
 	const [form, setForm] = useState("");
@@ -17,6 +16,10 @@ const Send = () => {
 
 	return (
 		<>
+			<Helmet>
+				<title>Transfer Funds</title>
+				<meta name="description" content="" />
+			</Helmet>
 			{(form === "other-provider" || form === "eth-vault") && (
 				<div className="p-4">
 					<button
