@@ -146,16 +146,16 @@ const Index = () => {
 				<div className="text-sm text-center space-y-2">
 					<p>
 						Already have an account?{" "}
-						<Link to={"/sign-in"} className="underline font-bold">
+						<Link to={"/sign-in"} className="underline">
 							Sign In
 						</Link>
 					</p>
 					<p className="flex gap-4 items-center justify-center">
-						<Link to={"/sign-in"} className="underline font-bold">
+						<Link to={"/sign-in"} className="underline">
 							Terms
 						</Link>{" "}
 						|
-						<Link to={"/sign-in"} className="underline font-bold">
+						<Link to={"/sign-in"} className="underline">
 							Privacy policy
 						</Link>
 					</p>

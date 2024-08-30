@@ -101,32 +101,27 @@ const SignIn = () => {
 							"Submit"
 						)}
 					</SubmitBtn>
-					<p className="text-center">
-						<Link to={"/sign-in"} className="underline font-bold">
-							Forgot password?
-						</Link>
-					</p>
 				</form>
 			</div>
 			<div className="text-sm text-center space-y-2">
 				<p>
 					Don't have an account?{" "}
-					<Link to={"/"} className="underline font-bold">
+					<Link to={"/"} className="underline">
 						Sign Up
 					</Link>
 				</p>
 				<p>
-					Forget password?{" "}
-					<Link to={"/sign-in"} className="underline font-bold">
-						Sign In
+					Forgot password?{" "}
+					<Link to={"/reset"} className="underline">
+						Reset
 					</Link>
 				</p>
 				<p className="flex gap-4 items-center justify-center">
-					<Link to={"/sign-in"} className="underline font-bold">
+					<Link to={"/sign-in"} className="underline">
 						Terms
 					</Link>{" "}
 					|
-					<Link to={"/sign-in"} className="underline font-bold">
+					<Link to={"/sign-in"} className="underline">
 						Privacy policy
 					</Link>
 				</p>
