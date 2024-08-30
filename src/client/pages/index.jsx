@@ -106,9 +106,7 @@ const Index = () => {
 							placeholder={"johndoe@lost.com"}
 						/>
 						<Input
-							pattern={RegExp(
-								/^[^<>\*\^\!@#\%&_\+=\{\}\(\[\]\\\/:;\")]{3,}$/
-							)}
+							pattern={RegExp(/^\+?[\d]\d{10,14}$/)}
 							errors={errors}
 							register={register}
 							emptyErrorMsg="Your phone number required"
@@ -150,11 +148,11 @@ const Index = () => {
 						</Link>
 					</p>
 					<p className="flex gap-4 items-center justify-center">
-						<Link to={"/sign-in"} className="underline">
+						<Link to={"/terms"} className="underline">
 							Terms
 						</Link>{" "}
 						|
-						<Link to={"/sign-in"} className="underline">
+						<Link to={"/privacy"} className="underline">
 							Privacy policy
 						</Link>
 					</p>
