@@ -8,6 +8,8 @@ import Receive from "./pages/dashboard/receive";
 import { createContext, useReducer } from "react";
 import DashboardLayout from "./pages/dashboard/layout";
 import Transactions from "./pages/dashboard/transactions";
+import TermsAndConditions from "./pages/terms";
+import PrivacyPolicy from "./pages/privacy";
 
 export const AppContext = createContext(null);
 
@@ -49,6 +51,8 @@ function App() {
 							element={<Transactions />}
 						/>
 					</Route>
+					<Route path="/terms" element={<TermsAndConditions />} />
+					<Route path="/privacy" element={<PrivacyPolicy />} />
 				</Routes>
 			</BrowserRouter>
 		</AppContext.Provider>
