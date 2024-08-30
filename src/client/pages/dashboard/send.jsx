@@ -40,8 +40,8 @@ const Send = () => {
 					<div className="flex gap-4 text-sm">
 						<button
 							onClick={() => setForm("eth-vault")}
-							className="flex-1 bg-white bg-opacity-20 p-4 rounded-lg flex items-center justify-center border border-slate-300 text-center backdrop-blur-sm active:scale-[.98]">
-							<img src="/images/usdt.svg" alt="ETH" width={40} />{" "}
+							className="flex-1 bg-white bg-opacity-20 p-4 rounded-lg flex items-center justify-center border border-slate-300 text-center gap-2 backdrop-blur-sm active:scale-[.98]">
+							<img src="/images/eth.svg" alt="ETH" width={20} />{" "}
 							EthVault
 						</button>
 						<button
