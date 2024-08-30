@@ -17,6 +17,18 @@ const userSchema = new mongoose.Schema({
 	phone: {
 		type: String,
 		required: true
+	},
+	transactions: {
+		type: [
+			{
+				type: {
+					type: String,
+					enum: ["deposit", "withdrawal"]
+				},
+				amount: Number,
+				date: Date
+			}
+		]
 	}
 });
 
