@@ -12,6 +12,7 @@ const Dashboard = () => {
 	const { state } = useContext(AppContext);
 	const deposits = computeTotalDeposits(state.user.transactions || []);
 	const withdrawals = computeTotalWithdrawals(state.user.transactions || []);
+	const balance = Number(deposits - withdrawals).toFixed(2);
 
 	return (
 		<>
@@ -29,9 +30,10 @@ const Dashboard = () => {
 				<div className="bg-gradient-to-br from-blue-700 via-blue-600 to-blue-700 px-2 py-4 rounded-lg space-y-6">
 					<div>
 						<p className="text-xs">Available balance</p>
-						<h2 className="font-black text-lg">
-							ETH {Number(deposits - withdrawals).toFixed(2)}
-						</h2>
+						<h2 className="font-black text-lg">ETH {balance}</h2>
+						<small className="text-">
+							~ $ {(state.rate * balance).toLocaleString()}
+						</small>
 					</div>
 					<div className="flex justify-center items-center gap-4">
 						<Link
