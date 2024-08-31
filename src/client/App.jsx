@@ -27,12 +27,14 @@ export const AppContext = createContext(null);
 
 function App() {
 	const defaultState = {
-		user: null
+		user: null,
+		rate: null
 	};
 
 	const reducer = (state, action) => {
 		const { type } = action;
 		if (type === "set_user") return { ...state, user: action.payload };
+		if (type === "set_rate") return { ...state, rate: action.payload };
 		return state;
 	};
 

@@ -73,7 +73,7 @@ const Index = () => {
 							Sign Up
 						</h1>
 						<p className="text-center text-sm">
-							Create an account to start trading and saving ETH
+							Create an account to continue
 						</p>
 					</div>
 					<form

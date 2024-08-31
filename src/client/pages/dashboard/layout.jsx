@@ -18,6 +18,9 @@ const DashboardLayout = () => {
 		(async () => {
 			try {
 				const response = await fetch("/api/user");
+				const response2 = await fetch(
+					"https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD"
+				);
 
 				if (!response.ok) {
 					switch (response.status) {
@@ -32,8 +35,10 @@ const DashboardLayout = () => {
 				}
 
 				const data = await response.json();
+				const { USD } = await response2.json();
 
 				dispatch({ type: "set_user", payload: data });
+				dispatch({ type: "set_rate", payload: USD });
 				setLoadState("done");
 			} catch (error) {
 				setLoadState("failed");
