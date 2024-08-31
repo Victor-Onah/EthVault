@@ -68,6 +68,11 @@ const Dashboard = () => {
 					{state.user.transactions.length > 0 ? (
 						state.user.transactions
 							.slice(0, 7)
+							.sort(
+								(a, b) =>
+									new Date(b.date).getTime() -
+									new Date(a.date).getTime()
+							)
 							.map((transaction, index) => (
 								<Link
 									key={index}

@@ -19,38 +19,46 @@ const Transactions = () => {
 			</div>
 			<div className="text-sm space-y-2">
 				{state.user.transactions.length > 0 ? (
-					state.user.transactions.map((transaction, index) => (
-						<Link
-							key={index}
-							to={`./transactions/${transaction._id}`}
-							className="active:scale-[.98] flex items-center justify-between gap-4 backdrop-blur-sm bg-white bg-opacity-20 p-2 rounded-lg border border-slate-300">
-							<div className="flex flex-1 gap-1 items-center text-xs">
-								<BiCalendar />{" "}
-								{new Date(
-									transaction.date
-								).toLocaleDateString()}
-							</div>
-							<div className="flex-1">
-								<p
-									className={`${
-										transaction.type === "deposit"
-											? "text-green-300"
-											: "text-red-300"
-									}`}>
-									{transaction.type === "withdrawal"
-										? "-"
-										: "+"}
-									ETH{" "}
-									{Number(
-										transaction.amount
-									).toLocaleString()}
-								</p>
-							</div>
-							<div className="flex-1 text-right">
-								<p className="capitalize">{transaction.type}</p>
-							</div>
-						</Link>
-					))
+					state.user.transactions
+						.sort(
+							(a, b) =>
+								new Date(b.date).getTime() -
+								new Date(a.date).getTime()
+						)
+						.map((transaction, index) => (
+							<Link
+								key={index}
+								to={`./transactions/${transaction._id}`}
+								className="active:scale-[.98] flex items-center justify-between gap-4 backdrop-blur-sm bg-white bg-opacity-20 p-2 rounded-lg border border-slate-300">
+								<div className="flex flex-1 gap-1 items-center text-xs">
+									<BiCalendar />{" "}
+									{new Date(
+										transaction.date
+									).toLocaleDateString()}
+								</div>
+								<div className="flex-1">
+									<p
+										className={`${
+											transaction.type === "deposit"
+												? "text-green-300"
+												: "text-red-300"
+										}`}>
+										{transaction.type === "withdrawal"
+											? "-"
+											: "+"}
+										ETH{" "}
+										{Number(
+											transaction.amount
+										).toLocaleString()}
+									</p>
+								</div>
+								<div className="flex-1 text-right">
+									<p className="capitalize">
+										{transaction.type}
+									</p>
+								</div>
+							</Link>
+						))
 				) : (
 					<div className="text-center p-4 rounded-lg bg-white bg-opacity-20 border border-slate-300 backdrop-blur-md">
 						No transactions to show
