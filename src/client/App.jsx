@@ -11,6 +11,7 @@ import Transactions from "./pages/dashboard/transactions";
 import TermsAndConditions from "./pages/terms";
 import PrivacyPolicy from "./pages/privacy";
 import Logout from "./pages/dashboard/logout";
+import Profile from "./pages/dashboard/profile";
 
 export const AppContext = createContext(null);
 
@@ -52,6 +53,10 @@ function App() {
 							element={<Transactions />}
 						/>
 						<Route path="/dashboard/logout" element={<Logout />} />
+						<Route
+							path="/dashboard/profile"
+							element={<Profile />}
+						/>
 					</Route>
 					<Route path="/terms" element={<TermsAndConditions />} />
 					<Route path="/privacy" element={<PrivacyPolicy />} />
