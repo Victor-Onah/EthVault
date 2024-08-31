@@ -67,7 +67,7 @@ const Dashboard = () => {
 				<div className="text-sm space-y-2">
 					{state.user.transactions.length > 0 ? (
 						state.user.transactions
-							.slice(0, 7)
+							.slice(state.user.transactions.length - 6)
 							.sort(
 								(a, b) =>
 									new Date(b.date).getTime() -
