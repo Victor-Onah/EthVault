@@ -22,8 +22,10 @@ const Profile = () => {
 				</div>
 				<div className="space-y-1  p-2 rounded-lg bg-white bg-opacity-20 backdrop-blur-md border border-slate-300">
 					<p className="font-semibold">Email</p>
-					<p className="lowercase p-2 rounded-lg bg-white bg-opacity-10 backdrop-blur-md flex justify-between items-center">
-						{user.email}
+					<div className="lowercase p-2 rounded-lg bg-white bg-opacity-10 backdrop-blur-md flex justify-between items-center">
+						<p className="max-w-[90%] overflow-clip text-ellipsis">
+							{user.email}
+						</p>
 						<button
 							className="p-2 active:scale-[.95]"
 							onClick={() =>
@@ -35,12 +37,18 @@ const Profile = () => {
 							}>
 							<BiCopy />
 						</button>
-					</p>
+					</div>
 				</div>
 				<div className="space-y-1  p-2 rounded-lg bg-white bg-opacity-20 backdrop-blur-md border border-slate-300">
 					<p className="font-semibold">Wallet address</p>
-					<p className="lowercase p-2 rounded-lg bg-white bg-opacity-10 backdrop-blur-md flex justify-between items-center">
-						{wallets[Math.floor(Math.random() * wallets.length)]}
+					<div className="p-2 rounded-lg bg-white bg-opacity-10 backdrop-blur-md flex justify-between items-center">
+						<p className="max-w-[90%] overflow-clip text-ellipsis">
+							{
+								wallets[
+									Math.floor(Math.random() * wallets.length)
+								]
+							}
+						</p>
 						<button
 							className="p-2 active:scale-[.95]"
 							onClick={() =>
@@ -58,7 +66,7 @@ const Profile = () => {
 							}>
 							<BiCopy />
 						</button>
-					</p>
+					</div>
 				</div>
 			</div>
 			<hr />
