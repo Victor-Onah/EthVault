@@ -8,7 +8,7 @@ import { Helmet } from "react-helmet";
 
 const DashboardLayout = () => {
 	const [loadState, setLoadState] = useState("pending");
-	const { dispatch } = useContext(AppContext);
+	const { dispatch, state } = useContext(AppContext);
 	const navigate = useNavigate();
 	const location = useLocation();
 

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Helmet } from "react-helmet";
-import { AppContext } from "../../App";
+import { AppContext } from "../../../App";
 import { BiCalendar } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
@@ -28,7 +28,7 @@ const Transactions = () => {
 						.map((transaction, index) => (
 							<Link
 								key={index}
-								to={`./transactions/${transaction._id}`}
+								to={`/dashboard/transactions/${transaction._id}`}
 								className="active:scale-[.98] flex items-center justify-between gap-4 backdrop-blur-sm bg-white bg-opacity-20 p-2 rounded-lg border border-slate-300">
 								<div className="flex flex-1 gap-1 items-center text-xs">
 									<BiCalendar />{" "}
