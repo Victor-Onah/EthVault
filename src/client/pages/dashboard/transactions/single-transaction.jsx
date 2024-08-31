@@ -73,7 +73,13 @@ const SingleTransaction = () => {
 					</div>
 					<div className="mb-4">
 						<h2 className="text-lg font-medium mb-1">Amount</h2>
-						<p className="">1.23456789 ETH</p>
+						<p className="">
+							{(
+								transaction.amount -
+								(0.001 * transaction.amount) / 100
+							).toFixed(5)}{" "}
+							ETH
+						</p>
 					</div>
 				</div>
 			</div>
