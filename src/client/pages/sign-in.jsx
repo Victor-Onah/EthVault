@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { CgSpinner } from "react-icons/cg";
 import { toast } from "sonner";
 import Logo from "../components/logo";
+import { Helmet } from "react-helmet";
 
 const SignIn = () => {
 	const {
@@ -54,6 +55,10 @@ const SignIn = () => {
 
 	return (
 		<main className="auth min-h-screen bg-blue-900 text-slate-50 flex items-center justify-center p-4 flex-col gap-8">
+			<Helmet>
+				<title>EthVault - Sign In</title>
+				<meta name="description" content="" />
+			</Helmet>
 			<Logo />
 			<div className="bg-slate-50 bg-opacity-10 backdrop-blur-md p-4 shadow-inner w-full max-w-96 rounded-md space-y-6">
 				<div>
