@@ -19,8 +19,8 @@ const Send = () => {
 	const handleTransfer = async form => {
 		try {
 			const response = await fetch(
-				`/api/user/transfer?${
-					form["wallet-address"] ? "external=true" : ""
+				`/api/user/transfer${
+					form["wallet-address"] ? "?external=true" : ""
 				}`,
 				{
 					body: JSON.stringify(form),
@@ -32,21 +32,35 @@ const Send = () => {
 			if (!response.ok) {
 				switch (response.status) {
 					case 400:
-						toast.error("Incorrect transaction PIN.");
+						{
+							const text = await response.text();
+
+							text === "balance_insufficient"
+								? toast.error(
+										"Transaction could not be completed due to insufficient funds."
+								  )
+								: toast.error("Incorrect transaction PIN.");
+						}
 						break;
 					case 403:
-						const text = await response.text();
-						text === "self"
-							? toast.error(
-									"You can't transfer funds to yourself"
-							  )
-							: toast.error(
-									"The account you wish to transfer to has not yet been setup to receive funds from other users on this platform."
-							  );
+						{
+							const text = await response.text();
+							text === "self"
+								? toast.error(
+										"You can't transfer funds to yourself"
+								  )
+								: toast.error(
+										"The account you wish to transfer to has not yet been setup to receive funds from other users on this platform."
+								  );
+						}
 						break;
 					case 404:
 						toast.error(
 							"The account you wish to transfer to does not exist on this platform. Please check the email and try again."
+						);
+					default:
+						toast.error(
+							"An internal server error ocurred. We're working to fix it"
 						);
 				}
 			}

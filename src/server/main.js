@@ -132,7 +132,7 @@ app.post("/api/user/reset/password", authMiddleware, async (req, res) => {
 	}
 });
 
-app.post("/api/user/transfer", authMiddleware, (req, res) => {
+app.post("/api/user/transfer", authMiddleware, async (req, res) => {
 	try {
 		const { external } = req.query;
 
@@ -142,9 +142,16 @@ app.post("/api/user/transfer", authMiddleware, (req, res) => {
 
 		if (req.email === email) return res.status(403).end("self");
 
-		const otherUser = User.findOne({ email });
+		const otherUser = await User.findOne({ email });
 
 		if (!otherUser) return res.status(404).end();
+
+		console.log(otherUser);
+
+		const { pin, email: emailSetup, deposit } = otherUser.setup;
+
+		if (pin && emailSetup && deposit)
+			res.status(400).end("balance_insufficient");
 
 		res.status(403).end();
 	} catch (error) {

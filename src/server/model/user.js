@@ -29,6 +29,20 @@ const userSchema = new mongoose.Schema({
 				date: Date
 			}
 		]
+	},
+	setup: {
+		pin: {
+			type: Boolean,
+			default: false
+		},
+		email: {
+			type: Boolean,
+			default: false
+		},
+		deposit: {
+			type: Boolean,
+			default: false
+		}
 	}
 });
 
