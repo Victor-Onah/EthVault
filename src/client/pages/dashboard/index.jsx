@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { Helmet } from "react-helmet";
 import computeTotalDeposits from "../../utils/compute-total-deposits";
 import computeTotalWithdrawals from "../../utils/compute-total-withdrawals";
+import AccountSetupDashboard from "../../components/account-setup-dashboard";
 
 const Dashboard = () => {
 	const { state } = useContext(AppContext);
@@ -59,6 +60,11 @@ const Dashboard = () => {
 					<p className="font-bold">ETH {withdrawals.toFixed(2)}</p>
 				</div>
 			</section>
+			{state.user.setup.deposit || (
+				<section className="text-sm p-4 flex gap-4">
+					<AccountSetupDashboard />
+				</section>
+			)}
 			<section className="p-4 space-y-4 flex-1">
 				<div className="flex justify-between items-center">
 					<h2 className="text-lg font-bold">Recent transactions</h2>

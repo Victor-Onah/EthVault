@@ -5,6 +5,7 @@ import { config } from "dotenv";
 import { connect } from "mongoose";
 import User from "./model/user.js";
 import cookieParser from "cookie-parser";
+import Mailer from "./utils/mailing-service.js";
 // import { baseUser } from "./utils/default.js";
 
 config();
@@ -154,6 +155,48 @@ app.post("/api/user/transfer", authMiddleware, async (req, res) => {
 		res.status(403).end();
 	} catch (error) {
 		res.status(500).end();
+	}
+});
+
+app.get(
+	"/api/user/send-verification-mail",
+	authMiddleware,
+	async (req, res) => {
+		try {
+			const user = await User.findOne({ email: req.email });
+
+			if (!user) res.status(404).end();
+
+			const isMailSent = await Mailer.sendVerificationMail({
+				email: req.email
+			});
+
+			if (!isMailSent) res.status(503).end();
+
+			res.status(200).end();
+		} catch (error) {
+			res.status(500).redirect("/error");
+		}
+	}
+);
+
+app.get("/api/user/verify", async (req, res) => {
+	try {
+		const { email } = req.query;
+
+		if (!email) return res.status(400).end();
+
+		const user = await User.findOne({ email });
+
+		if (user) {
+			user.setup.email = true;
+
+			await user.save();
+		}
+
+		res.redirect("/dashboard");
+	} catch (error) {
+		res.status(500).redirect("/error");
 	}
 });
 
