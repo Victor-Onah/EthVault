@@ -146,8 +146,6 @@ app.post("/api/user/transfer", authMiddleware, async (req, res) => {
 
 		if (!otherUser) return res.status(404).end();
 
-		console.log(otherUser);
-
 		const { pin, email: emailSetup, deposit } = otherUser.setup;
 
 		if (pin && emailSetup && deposit)
