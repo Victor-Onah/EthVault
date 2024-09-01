@@ -58,11 +58,7 @@ const Setup = () => {
 				) : (
 					<div className="bg-white bg-opacity-20 backdrop-blur-md border border-slate-300 p-4 rounded-lg text-center space-y-4 text-sm w-full max-w-80">
 						<Helmet>
-							<title>
-								{mailSent && !sendingEmail
-									? `Verify Email`
-									: `Resending Email...`}
-							</title>
+							<title>Fund Account</title>
 						</Helmet>
 						<h1 className="text-2xl font-bold">Fund Account</h1>
 						<div className="text-4xl flex justify-center">
