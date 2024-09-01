@@ -5,6 +5,7 @@ import PinSetupForm from "../../components/pin-setup-form";
 import VerificationEmail from "../../components/verification-email";
 import { FaEthereum } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Setup = () => {
 	const { state } = useContext(AppContext);
