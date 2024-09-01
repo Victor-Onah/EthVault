@@ -29,7 +29,7 @@ const AccountSetupDashboard = () => {
 			<Link
 				to="./setup"
 				className="p-2 rounded-md bg-blue-900 float-right inline-block">
-				{state.user.setup.pin ? "Get started" : "Continue"}
+				{!state.user.setup.pin ? "Get started" : "Continue"}
 			</Link>
 		</div>
 	);

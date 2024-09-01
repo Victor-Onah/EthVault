@@ -1,9 +1,13 @@
 import React from "react";
 import Logo from "../components/logo";
+import { Helmet } from "react-helmet";
 
 const PrivacyPolicy = () => {
 	return (
 		<main className="auth min-h-screen bg-blue-900 text-slate-50 flex items-center justify-center p-4 flex-col gap-8">
+			<Helmet>
+				<title>Privacy Policy</title>
+			</Helmet>
 			<Logo />
 			<div className="bg-white max-w-3xl m-auto bg-opacity-10 backdrop-blur-md p-4 rounded-lg border border-slate-300">
 				<div className="privacy-policy">

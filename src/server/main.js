@@ -61,7 +61,7 @@ app.post("/api/sign-in", async (req, res) => {
 			path: "/"
 		});
 
-		res.status(200).end();
+		res.end();
 	} catch (error) {
 		res.status(500).end();
 	}
@@ -165,15 +165,15 @@ app.get(
 		try {
 			const user = await User.findOne({ email: req.email });
 
-			if (!user) res.status(404).end();
+			if (!user) return res.status(404).end();
 
 			const isMailSent = await Mailer.sendVerificationMail({
 				email: req.email
 			});
 
-			if (!isMailSent) res.status(503).end();
+			if (!isMailSent) return res.status(503).end();
 
-			res.status(200).end();
+			res.end();
 		} catch (error) {
 			res.status(500).redirect("/error");
 		}
@@ -197,6 +197,23 @@ app.get("/api/user/verify", async (req, res) => {
 		res.redirect("/dashboard");
 	} catch (error) {
 		res.status(500).redirect("/error");
+	}
+});
+
+app.post("/api/user/setup/pin", authMiddleware, async (req, res) => {
+	try {
+		const user = await User.findOne({ email: req.email });
+
+		if (!user) return res.status(404).end();
+
+		user.setup.pin = true;
+
+		await user.save();
+
+		res.end();
+	} catch (error) {
+		console.log(error);
+		res.status(500).end();
 	}
 });
 

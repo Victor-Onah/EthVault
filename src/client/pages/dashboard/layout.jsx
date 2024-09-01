@@ -15,36 +15,40 @@ const DashboardLayout = () => {
 	useEffect(() => window.scrollTo({ top: 0 }), [location]);
 
 	useEffect(() => {
-		(async () => {
-			try {
-				const response = await fetch("/api/user");
-				const response2 = await fetch(
-					"https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD"
-				);
+		if (!state.user) {
+			(async () => {
+				try {
+					const response = await fetch("/api/user");
+					const response2 = await fetch(
+						"https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD"
+					);
 
-				if (!response.ok) {
-					switch (response.status) {
-						case 401:
-							navigate("/sign-in");
-							break;
-						default:
-							setLoadState("failed");
-							break;
+					if (!response.ok) {
+						switch (response.status) {
+							case 401:
+								navigate("/sign-in");
+								break;
+							default:
+								setLoadState("failed");
+								break;
+						}
+						return;
 					}
-					return;
+
+					const data = await response.json();
+					const { USD } = await response2.json();
+
+					dispatch({ type: "set_user", payload: data });
+					dispatch({ type: "set_rate", payload: USD });
+					setLoadState("done");
+				} catch (error) {
+					setLoadState("failed");
+					console.log(error);
 				}
-
-				const data = await response.json();
-				const { USD } = await response2.json();
-
-				dispatch({ type: "set_user", payload: data });
-				dispatch({ type: "set_rate", payload: USD });
-				setLoadState("done");
-			} catch (error) {
-				setLoadState("failed");
-				console.log(error);
-			}
-		})();
+			})();
+		} else {
+			setLoadState("done");
+		}
 	}, []);
 
 	return (

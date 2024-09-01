@@ -35,6 +35,14 @@ function App() {
 		if (type === "set_rate") return { ...state, rate: action.payload };
 		if (type === "update_email")
 			return { ...state, user: { ...state.user, email: payload } };
+		if (type === "pin_set")
+			return {
+				...state,
+				user: {
+					...state.user,
+					setup: { ...state.user.setup, pin: true }
+				}
+			};
 		return state;
 	};
 
