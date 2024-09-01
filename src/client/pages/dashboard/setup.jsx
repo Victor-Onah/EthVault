@@ -6,6 +6,7 @@ import VerificationEmail from "../../components/verification-email";
 import { FaEthereum } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import SubmitBtn from "../../components/button";
 
 const Setup = () => {
 	const { state } = useContext(AppContext);
