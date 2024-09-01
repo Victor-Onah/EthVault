@@ -1,12 +1,4 @@
-import {
-	BrowserRouter,
-	Routes,
-	Route,
-	createBrowserRouter,
-	RouterProvider,
-	useNavigate,
-	Outlet
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Index from "./pages";
 import SignIn from "./pages/sign-in";
 import Dashboard from "./pages/dashboard";
