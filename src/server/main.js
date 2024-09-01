@@ -16,6 +16,19 @@ app.use(express.static(resolve(process.cwd(), "./public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+const authMiddleware = async (req, res, next) => {
+	try {
+		const authCookie = req.cookies.auth;
+
+		if (!authCookie) return res.status(401).end();
+
+		req.email = Buffer.from(authCookie, "hex").toString("utf-8");
+
+		next();
+	} catch (error) {
+		res.status(500).end();
+	}
+};
 
 app.post("/api/sign-up", async (req, res) => {
 	try {
@@ -53,14 +66,9 @@ app.post("/api/sign-in", async (req, res) => {
 	}
 });
 
-app.get("/api/user", async (req, res) => {
+app.get("/api/user", authMiddleware, async (req, res) => {
 	try {
-		const authCookie = req.cookies.auth;
-
-		if (!authCookie) return res.status(401).end();
-
-		const email = Buffer.from(authCookie, "hex").toString("utf-8");
-		const user = await User.findOne({ email });
+		const user = await User.findOne({ email: req.email });
 
 		if (!user) return res.status(401).end();
 
@@ -81,7 +89,7 @@ app.get("/api/user/logout", async (req, res) => {
 	res.end();
 });
 
-app.post("/api/user/reset/email", async (req, res) => {
+app.post("/api/user/reset/email", authMiddleware, async (req, res) => {
 	try {
 		const { email, "new-email": newEmail } = req.body;
 
@@ -104,7 +112,7 @@ app.post("/api/user/reset/email", async (req, res) => {
 	}
 });
 
-app.post("/api/user/reset/password", async (req, res) => {
+app.post("/api/user/reset/password", authMiddleware, async (req, res) => {
 	try {
 		const { email, "new-password": newPassword } = req.body;
 
@@ -119,6 +127,26 @@ app.post("/api/user/reset/password", async (req, res) => {
 		await user.save();
 
 		res.status(201).end();
+	} catch (error) {
+		res.status(500).end();
+	}
+});
+
+app.post("/api/user/transfer", authMiddleware, (req, res) => {
+	try {
+		const { external } = req.query;
+
+		if (external) return res.status(400).end();
+
+		const { email } = req.body;
+
+		if (req.email === email) return res.status(403).end("self");
+
+		const otherUser = User.findOne({ email });
+
+		if (!otherUser) return res.status(404).end();
+
+		res.status(403).end();
 	} catch (error) {
 		res.status(500).end();
 	}

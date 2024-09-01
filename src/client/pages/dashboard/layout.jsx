@@ -42,6 +42,7 @@ const DashboardLayout = () => {
 				setLoadState("done");
 			} catch (error) {
 				setLoadState("failed");
+				console.log(error);
 			}
 		})();
 	}, []);

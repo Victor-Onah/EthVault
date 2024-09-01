@@ -5,14 +5,55 @@ import SubmitBtn from "../../components/button";
 import { useForm } from "react-hook-form";
 import { TfiAngleLeft } from "react-icons/tfi";
 import { Helmet } from "react-helmet";
+import { toast } from "sonner";
+import { CgSpinner } from "react-icons/cg";
 
 const Send = () => {
 	const [form, setForm] = useState("");
 	const {
 		register,
 		handleSubmit,
-		formState: { errors, isSubmitting }
+		formState: { errors, isSubmitting, isValid }
 	} = useForm({ mode: "onBlur" });
+
+	const handleTransfer = async form => {
+		try {
+			const response = await fetch(
+				`/api/user/transfer?${
+					form["wallet-address"] ? "external=true" : ""
+				}`,
+				{
+					body: JSON.stringify(form),
+					method: "POST",
+					headers: { "Content-type": "application/json" }
+				}
+			);
+
+			if (!response.ok) {
+				switch (response.status) {
+					case 400:
+						toast.error("Incorrect transaction PIN.");
+						break;
+					case 403:
+						const text = await response.text();
+						text === "self"
+							? toast.error(
+									"You can't transfer funds to yourself"
+							  )
+							: toast.error(
+									"The account you wish to transfer to has not yet been setup to receive funds from other users on this platform."
+							  );
+						break;
+					case 404:
+						toast.error(
+							"The account you wish to transfer to does not exist on this platform. Please check the email and try again."
+						);
+				}
+			}
+		} catch (error) {
+			toast.error(error.message);
+		}
+	};
 
 	return (
 		<>
@@ -65,12 +106,7 @@ const Send = () => {
 							</p>
 						</div>
 						<form
-							onSubmit={handleSubmit(
-								async form =>
-									await new Promise(resolve =>
-										setTimeout(() => resolve(), 10000)
-									)
-							)}
+							onSubmit={handleSubmit(handleTransfer)}
 							className="space-y-4">
 							<Input
 								pattern={RegExp(
@@ -88,22 +124,25 @@ const Send = () => {
 								placeholder={"johndoe@lost.com"}
 							/>
 							<Input
-								pattern={RegExp(/^[\d]{2,}$/)}
+								pattern={RegExp(/^[\d]+\.?[\d]*$/)}
 								errors={errors}
 								register={register}
 								emptyErrorMsg="Please set an amount"
-								inputErrorMsg="Minimum of ETH10"
+								inputErrorMsg="Minimum of ETH 0.0001"
 								label={"Amount"}
-								type={"number"}
+								type={"text"}
 								name={"amount"}
 								id={"amount"}
 								required={true}
 								placeholder={"100.00"}
-								minLength={4}
-								maxLength={4}
-								min={10}
 							/>
-							<SubmitBtn>Transfer</SubmitBtn>
+							<SubmitBtn disabled={isSubmitting || !isValid}>
+								{isSubmitting ? (
+									<CgSpinner className="animate-spin" />
+								) : (
+									"Transfer"
+								)}
+							</SubmitBtn>
 						</form>
 					</div>
 				</section>
@@ -121,12 +160,7 @@ const Send = () => {
 							</p>
 						</div>
 						<form
-							onSubmit={handleSubmit(
-								async form =>
-									await new Promise(resolve =>
-										setTimeout(() => resolve(), 10000)
-									)
-							)}
+							onSubmit={handleSubmit(handleTransfer)}
 							className="space-y-4">
 							<Input
 								pattern={RegExp(/^0x[a-zA-Z0-9]{40}$/)}
@@ -142,20 +176,17 @@ const Send = () => {
 								placeholder={"0x***************"}
 							/>
 							<Input
-								pattern={RegExp(/^[\d]{2,}$/)}
+								pattern={RegExp(/^[\d]+\.?[\d]*$/)}
 								errors={errors}
 								register={register}
 								emptyErrorMsg="Please set an amount"
-								inputErrorMsg="Minimum of ETH10"
+								inputErrorMsg="Minimum of ETH 0.0001"
 								label={"Amount"}
-								type={"number"}
+								type={"text"}
 								name={"amount"}
 								id={"amount"}
 								required={true}
 								placeholder={"100.00"}
-								minLength={4}
-								maxLength={4}
-								min={10}
 							/>
 							<Input
 								pattern={RegExp(/^[\d]{4}$/)}
@@ -164,15 +195,19 @@ const Send = () => {
 								emptyErrorMsg="Please enter your 4-digit transaction PIN"
 								inputErrorMsg="Transaction PINS are only 4-digits"
 								label={"Transaction PIN"}
-								type={"number"}
+								type={"text"}
 								name={"pin"}
 								id={"pin"}
 								required={true}
 								placeholder={"****"}
-								minLength={4}
-								maxLength={4}
 							/>
-							<SubmitBtn>Transfer</SubmitBtn>
+							<SubmitBtn disabled={isSubmitting || !isValid}>
+								{isSubmitting ? (
+									<CgSpinner className="animate-spin" />
+								) : (
+									"Transfer"
+								)}
+							</SubmitBtn>
 						</form>
 					</div>
 				</section>
