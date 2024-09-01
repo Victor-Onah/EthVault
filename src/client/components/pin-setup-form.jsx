@@ -5,6 +5,8 @@ import { CgSpinner } from "react-icons/cg";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { useContext } from "react";
+import { AppContext } from "../App";
 
 const PinSetupForm = () => {
 	const {
@@ -14,6 +16,8 @@ const PinSetupForm = () => {
 	} = useForm();
 
 	const navigate = useNavigate();
+
+	const { dispatch } = useContext(AppContext);
 
 	const handlePinSetup = async form => {
 		try {
