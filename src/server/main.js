@@ -81,6 +81,49 @@ app.get("/api/user/logout", async (req, res) => {
 	res.end();
 });
 
+app.post("/api/user/reset/email", async (req, res) => {
+	try {
+		const { email, "new-email": newEmail } = req.body;
+
+		if (!email || !newEmail) return res.status(403).end();
+
+		const user = await User.findOne({ email });
+		const userWithNewEmail = await User.findOne({ email: newEmail });
+
+		if (userWithNewEmail) return res.status(409).end();
+
+		if (!user) return res.status(404).end();
+
+		user.email = newEmail;
+
+		await user.save();
+
+		res.status(201).end();
+	} catch (error) {
+		res.status(500).end();
+	}
+});
+
+app.post("/api/user/reset/password", async (req, res) => {
+	try {
+		const { email, "new-password": newPassword } = req.body;
+
+		if (!email || !newPassword) return res.status(403).end();
+
+		const user = await User.findOne({ email });
+
+		if (!user) return res.status(404).end();
+
+		user.password = newPassword;
+
+		await user.save();
+
+		res.status(201).end();
+	} catch (error) {
+		res.status(500).end();
+	}
+});
+
 ViteExpress.listen(app, 3000, async () => {
 	try {
 		await connect(process.env.DB_URL);

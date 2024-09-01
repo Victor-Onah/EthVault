@@ -4,6 +4,7 @@ import { BiCopy } from "react-icons/bi";
 import { toast } from "sonner";
 import wallets from "../../assets/wallets";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Profile = () => {
 	const {
@@ -12,6 +13,9 @@ const Profile = () => {
 
 	return (
 		<div className="p-4 space-y-6">
+			<Helmet>
+				<title>Profile</title>
+			</Helmet>
 			<h1 className="text-2xl font-bold text-center">Profile</h1>
 			<div className="text-sm space-y-2">
 				<div className="space-y-1  p-2 rounded-lg bg-white bg-opacity-20 backdrop-blur-md border border-slate-300">

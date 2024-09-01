@@ -1,20 +1,38 @@
 import { useContext } from "react";
 import { AppContext } from "../../../App";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { BiCheckCircle } from "react-icons/bi";
 import generateETHAddress from "../../../utils/generate-address";
 import wallets from "../../../assets/wallets";
+import { Helmet } from "react-helmet";
+import { TbError404 } from "react-icons/tb";
 
 const SingleTransaction = () => {
 	const { id } = useParams();
-	const navigate = useNavigate();
 	const { state } = useContext(AppContext);
 
 	const transaction = state.user.transactions.find(
 		transactions => transactions._id === id
 	);
 
-	if (!transaction) return navigate("/not-found");
+	if (!transaction)
+		return (
+			<div className="flex-1 flex items-center justify-center p-4">
+				<Helmet>
+					<title>Error - Not Found</title>
+					<meta name="description" content="" />
+				</Helmet>
+				<div className="bg-white bg-opacity-20 backdrop-blur-md border border-slate-300 p-4 rounded-lg text-center space-y-4 text-sm w-full max-w-80">
+					<h1 className="text-2xl font-bold">Not Found</h1>
+					<div className="text-4xl flex justify-center">
+						<span>
+							<TbError404 />
+						</span>
+					</div>
+					<p>We can't find transaction with id of {id}</p>
+				</div>
+			</div>
+		);
 
 	return (
 		<div className="flex-1 p-4 space-y-6">

@@ -47,7 +47,7 @@ const DashboardLayout = () => {
 	}, []);
 
 	return (
-		<main className="auth bg-blue-900 text-white">
+		<main className="auth text-white">
 			{loadState === "done" && (
 				<div className="max-w-3xl m-auto flex flex-col  min-h-screen">
 					<Header />

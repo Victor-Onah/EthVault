@@ -22,6 +22,11 @@ import Profile from "./pages/dashboard/profile";
 import SingleTransaction from "./pages/dashboard/transactions/single-transaction";
 import TransactionsLayout from "./pages/dashboard/transactions/layout";
 import Transactions from "./pages/dashboard/transactions";
+import NotFound from "./pages/not-found";
+import Error from "./pages/error";
+import DashboardNotFound from "./pages/dashboard/not-found";
+import ResetPassword from "./pages/dashboard/reset/password";
+import ResetEmail from "./pages/dashboard/reset/email";
 
 export const AppContext = createContext(null);
 
@@ -35,6 +40,8 @@ function App() {
 		const { type } = action;
 		if (type === "set_user") return { ...state, user: action.payload };
 		if (type === "set_rate") return { ...state, rate: action.payload };
+		if (type === "update_email")
+			return { ...state, user: { ...state.user, email: payload } };
 		return state;
 	};
 
@@ -43,6 +50,7 @@ function App() {
 	const router = createBrowserRouter([
 		{
 			path: "/",
+			errorElement: <Error />,
 			element: (
 				<>
 					<Toaster richColors duration={4000} />
@@ -93,8 +101,20 @@ function App() {
 							element: <Logout />
 						},
 						{
+							path: "/dashboard/reset/password",
+							element: <ResetPassword />
+						},
+						{
+							path: "/dashboard/reset/email",
+							element: <ResetEmail />
+						},
+						{
 							path: "/dashboard/profile",
 							element: <Profile />
+						},
+						{
+							path: "/dashboard/*",
+							element: <DashboardNotFound />
 						}
 					]
 				},
@@ -105,6 +125,10 @@ function App() {
 				{
 					path: "/privacy",
 					element: <PrivacyPolicy />
+				},
+				{
+					path: "/*",
+					element: <NotFound />
 				}
 			]
 		}
