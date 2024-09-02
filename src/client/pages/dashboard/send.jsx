@@ -58,6 +58,7 @@ const Send = () => {
 						toast.error(
 							"The account you wish to transfer to does not exist on this platform. Please check the email and try again."
 						);
+						break;
 					default:
 						toast.error(
 							"An internal server error ocurred. We're working to fix it."
