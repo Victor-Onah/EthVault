@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { CgSpinner } from "react-icons/cg";
 import { LuImagePlus } from "react-icons/lu";
+import { Helmet } from "react-helmet";
 
 const SupportPage = () => {
 	const { state } = useContext(AppContext);
@@ -86,6 +87,9 @@ const SupportPage = () => {
 
 	return (
 		<div class="flex-1">
+			<Helmet>
+				<title>EthVault - Contact Support</title>
+			</Helmet>
 			<section class="py-12 md:py-16 lg:py-20 px-4 md:px-6 text-sm">
 				<div class="container max-w-4xl mx-auto space-y-6">
 					<div className="text-center">
