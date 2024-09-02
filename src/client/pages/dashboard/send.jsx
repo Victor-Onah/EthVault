@@ -47,16 +47,16 @@ const Send = () => {
 							const text = await response.text();
 							text === "self"
 								? toast.error(
-										"You can't transfer funds to yourself."
+										"Transferring funds to your own account is not allowed."
 								  )
 								: toast.error(
-										"The account you wish to transfer to has not yet been setup to receive funds from other users on this platform."
+										"The account you are trying to transfer to has not yet been set up to receive funds from other users on this platform. If you are the owner, please complete the setup process."
 								  );
 						}
 						break;
 					case 404:
 						toast.error(
-							"The account you wish to transfer to does not exist on this platform. Please ensure the email address is correct or try creating a new account with the email."
+							"The account you wish to transfer to does not exist on this platform. Try creating a new account with the email or ensure the email address is correct."
 						);
 						break;
 					default:
