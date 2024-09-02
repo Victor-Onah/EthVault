@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CgSpinner } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import SubmitBtn from "../../components/button";
 import { Helmet } from "react-helmet";
+import { AppContext } from "../../App";
 
 const Logout = () => {
 	const [loadState, setLoadState] = useState("pending");
 	const navigate = useNavigate();
+	const { dispatch } = useContext(AppContext);
 
 	const logout = async () => {
 		try {
@@ -15,6 +17,7 @@ const Logout = () => {
 			await fetch("/api/user/logout");
 
 			navigate("/sign-in");
+			dispatch({ type: "set_user", payload: null });
 		} catch (error) {
 			setLoadState("failed");
 		}

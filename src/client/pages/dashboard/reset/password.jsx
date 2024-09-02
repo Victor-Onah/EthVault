@@ -59,6 +59,11 @@ const ResetPassword = () => {
 									case 403:
 										navigate("/sign-in");
 										break;
+									case 401:
+										toast.error(
+											"Incorrect transaction PIN."
+										);
+										break;
 									default:
 										toast.error(
 											"An internal server error ocurred. We're working to fix it."
@@ -71,7 +76,7 @@ const ResetPassword = () => {
 								);
 							}
 
-							toast.success("Email updated successfully");
+							toast.success("Password updated successfully.");
 							navigate("/sign-in");
 						} catch (error) {
 							toast.error(error.message);
@@ -124,6 +129,19 @@ const ResetPassword = () => {
 						id={"new-password"}
 						required={true}
 						placeholder={"P@ssw0rd"}
+					/>
+					<Input
+						pattern={RegExp(/^[\d]{4}$/)}
+						errors={errors}
+						register={register}
+						emptyErrorMsg="Please enter your 4-digit transaction PIN. It is needed for authorization."
+						inputErrorMsg="Transaction PINS are only 4-digits"
+						label={"Transaction PIN"}
+						type={"text"}
+						name={"pin"}
+						id={"pin"}
+						required={true}
+						placeholder={"****"}
 					/>
 					<SubmitBtn disabled={!isValid || isSubmitting}>
 						{isSubmitting ? (

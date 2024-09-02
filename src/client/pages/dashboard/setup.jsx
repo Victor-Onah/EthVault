@@ -45,10 +45,10 @@ const Setup = () => {
 				</h1>
 				<p className="max-w-[400px] m-auto">
 					{!state.user.setup.pin
-						? "Transaction PINs are used during payment verification and other processes that require authorization."
+						? "Transaction PINs are used during payment verification and other processes that require authorization"
 						: !state.user.setup.email
-						? "We want to make sure you're a real person. You can change your email any time."
-						: "A balance of at least ETH 0.1 is required before users can start transacting with each other on the platform. We do this to make sure that user accounts are not left in active"}
+						? "We want to make sure you're a real person. You can change your email any time"
+						: "A balance of at least ETH 0.1 is required before users can start transacting with each other on the platform. We do this to make sure that user accounts are not left inactive"}
 				</p>
 			</div>
 			<div>

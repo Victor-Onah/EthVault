@@ -117,7 +117,7 @@ const Dashboard = () => {
 							))
 					) : (
 						<div className="text-center p-4 rounded-lg bg-white bg-opacity-20 border border-slate-300 backdrop-blur-md">
-							No transactions to show
+							No transactions to show.
 						</div>
 					)}
 				</div>

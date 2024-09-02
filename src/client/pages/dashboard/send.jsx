@@ -47,7 +47,7 @@ const Send = () => {
 							const text = await response.text();
 							text === "self"
 								? toast.error(
-										"You can't transfer funds to yourself"
+										"You can't transfer funds to yourself."
 								  )
 								: toast.error(
 										"The account you wish to transfer to has not yet been setup to receive funds from other users on this platform."
@@ -60,7 +60,7 @@ const Send = () => {
 						);
 					default:
 						toast.error(
-							"An internal server error ocurred. We're working to fix it"
+							"An internal server error ocurred. We're working to fix it."
 						);
 				}
 			}

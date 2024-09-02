@@ -19,12 +19,14 @@ const AccountSetupDashboard = () => {
 			<div className="h-1 bg-blue-300 rounded-full">
 				<div
 					className={`${
-						state.user.setup.pin
-							? "w-1/3"
-							: state.user.setup.pin
-							? "w-2/3"
-							: "w-0"
-					} h-full w-1/2 bg-blue-900`}></div>
+						state.user.setup.pin &&
+						!state.user.setup.email &&
+						"w-1/3"
+					} ${
+						state.user.setup.email &&
+						!!state.user.setup.deposit &&
+						"w-2/3"
+					} h-full bg-blue-900`}></div>
 			</div>
 			<Link
 				to="./setup"

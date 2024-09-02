@@ -65,7 +65,7 @@ const Profile = () => {
 									]
 								),
 								toast.success(
-									"Wallet address copied to clipboard"
+									"Wallet address copied to clipboard."
 								))
 							}>
 							<BiCopy />

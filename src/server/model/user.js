@@ -30,6 +30,9 @@ const userSchema = new mongoose.Schema({
 			}
 		]
 	},
+	pin: {
+		type: String
+	},
 	setup: {
 		pin: {
 			type: Boolean,

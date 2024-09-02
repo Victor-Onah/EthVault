@@ -92,7 +92,7 @@ app.get("/api/user/logout", async (req, res) => {
 
 app.post("/api/user/reset/email", authMiddleware, async (req, res) => {
 	try {
-		const { email, "new-email": newEmail } = req.body;
+		const { email, "new-email": newEmail, pin } = req.body;
 
 		if (!email || !newEmail) return res.status(403).end();
 
@@ -102,6 +102,8 @@ app.post("/api/user/reset/email", authMiddleware, async (req, res) => {
 		if (userWithNewEmail) return res.status(409).end();
 
 		if (!user) return res.status(404).end();
+
+		if (!user.pin === pin) return res.status(401).end();
 
 		user.email = newEmail;
 
@@ -115,13 +117,15 @@ app.post("/api/user/reset/email", authMiddleware, async (req, res) => {
 
 app.post("/api/user/reset/password", authMiddleware, async (req, res) => {
 	try {
-		const { email, "new-password": newPassword } = req.body;
+		const { email, "new-password": newPassword, pin } = req.body;
 
 		if (!email || !newPassword) return res.status(403).end();
 
 		const user = await User.findOne({ email });
 
 		if (!user) return res.status(404).end();
+
+		if (user.pin !== pin) return res.status(401).end();
 
 		user.password = newPassword;
 
@@ -202,11 +206,16 @@ app.get("/api/user/verify", async (req, res) => {
 
 app.post("/api/user/setup/pin", authMiddleware, async (req, res) => {
 	try {
+		const { pin } = req.body;
+
+		if (!pin) return res.status(400).end();
+
 		const user = await User.findOne({ email: req.email });
 
 		if (!user) return res.status(404).end();
 
 		user.setup.pin = true;
+		user.pin = pin;
 
 		await user.save();
 

@@ -31,10 +31,10 @@ const Receive = () => {
 									wallets[Math.floor(Math.random() * 2)]
 								);
 								toast.success(
-									"Wallet address copied successfully"
+									"Wallet address copied successfully."
 								);
 							} else {
-								toast.error("Failed to copy");
+								toast.error("Failed to copy.");
 							}
 						}}>
 						<BiCopy />
@@ -54,10 +54,10 @@ const Receive = () => {
 									state.user.email
 								);
 								toast.success(
-									"Email address copied successfully"
+									"Email address copied successfully."
 								);
 							} else {
-								toast.error("Failed to copy");
+								toast.error("Failed to copy.");
 							}
 						}}>
 						<BiCopy />

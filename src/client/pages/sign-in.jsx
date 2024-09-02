@@ -34,9 +34,7 @@ const SignIn = () => {
 						);
 						break;
 					case 401:
-						toast.error(
-							"Seems like your email or password is incorrect. Please check and try again"
-						);
+						toast.error();
 						break;
 					default:
 						toast.error(

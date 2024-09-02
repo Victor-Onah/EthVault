@@ -74,7 +74,7 @@ const DashboardLayout = () => {
 						<title>Error</title>
 						<meta name="description" content="" />
 					</Helmet>
-					<div className="bg-red-700 bg-opacity-20 backdrop-blur-md border border-slate-300 p-4 rounded-lg text-center space-y-4 text-sm w-full max-w-80">
+					<div className="bg-white bg-opacity-20 backdrop-blur-md border border-slate-300 p-4 rounded-lg text-center space-y-4 text-sm w-full max-w-80">
 						<h1 className="text-2xl font-bold">Oops!</h1>
 						<div className="text-4xl flex justify-center">
 							<span>
@@ -101,7 +101,7 @@ const DashboardLayout = () => {
 								<CgSpinner />
 							</span>
 						</div>
-						<p>We're loading your dashboard</p>
+						<p>We're loading your dashboard.</p>
 					</div>
 				</div>
 			)}

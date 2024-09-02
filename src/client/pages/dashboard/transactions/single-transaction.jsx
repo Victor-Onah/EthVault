@@ -39,33 +39,29 @@ const SingleTransaction = () => {
 			<h1 className="text-2xl font-bold text-center">
 				Transaction Details
 			</h1>
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-6 backdrop-blur-sm bg-white bg-opacity-20 p-2 rounded-lg border border-slate-300 text-sm">
+			<div className="grid grid-cols-1 md:grid-cols-2 md:gap-6 backdrop-blur-sm bg-white bg-opacity-20 p-2 rounded-lg border border-slate-300 text-sm">
 				<div>
 					<div className="mb-4">
-						<h2 className="text-lg font-medium mb-1">
-							Transaction Hash
-						</h2>
-						<p className=" break-all">{generateETHAddress()}</p>
+						<h2 className="font-medium mb-1">Transaction Hash</h2>
+						<p className="text-sm break-all">
+							{generateETHAddress()}
+						</p>
 					</div>
 					<div className="mb-4">
-						<h2 className="text-lg font-medium mb-1">
-							Block Number
-						</h2>
-						<p className="">{transaction._id}</p>
+						<h2 className="font-medium mb-1">Block Number</h2>
+						<p className="text-sm">{transaction._id}</p>
 					</div>
 					<div className="mb-4">
-						<h2 className="text-lg font-medium mb-1">Timestamp</h2>
-						<p className="">
+						<h2 className="font-medium mb-1">Timestamp</h2>
+						<p className="text-sm">
 							{new Date(transaction.date).toDateString()}
 						</p>
 					</div>
 				</div>
 				<div>
 					<div className="mb-4">
-						<h2 className="text-lg font-medium mb-1">
-							Sender Address
-						</h2>
-						<p className=" break-all">
+						<h2 className="font-medium mb-1">Sender Address</h2>
+						<p className="text-sm break-all">
 							{transaction.type === "deposit"
 								? generateETHAddress()
 								: wallets[
@@ -76,10 +72,8 @@ const SingleTransaction = () => {
 						</p>
 					</div>
 					<div className="mb-4">
-						<h2 className="text-lg font-medium mb-1">
-							Recipient Address
-						</h2>
-						<p className=" break-all">
+						<h2 className="font-medium mb-1">Recipient Address</h2>
+						<p className="text-sm break-all">
 							{transaction.type === "deposit"
 								? wallets[
 										Math.floor(
@@ -90,8 +84,8 @@ const SingleTransaction = () => {
 						</p>
 					</div>
 					<div className="mb-4">
-						<h2 className="text-lg font-medium mb-1">Amount</h2>
-						<p className="">
+						<h2 className="font-medium mb-1">Amount</h2>
+						<p className="text-sm">
 							{(
 								transaction.amount -
 								(0.001 * transaction.amount) / 100
@@ -102,7 +96,7 @@ const SingleTransaction = () => {
 				</div>
 			</div>
 			<div className="backdrop-blur-sm bg-white bg-opacity-20 p-2 rounded-lg border border-slate-300 text-sm">
-				<h2 className="text-lg font-medium mb-2">Transaction Status</h2>
+				<h2 className="font-medium mb-2">Transaction Status</h2>
 				<div className="flex items-center gap-2">
 					<BiCheckCircle className="h-6 w-6 text-green-300" />
 					<span className="text-green-300 font-medium">
@@ -111,8 +105,8 @@ const SingleTransaction = () => {
 				</div>
 			</div>
 			<div className="backdrop-blur-sm bg-white bg-opacity-20 p-2 rounded-lg border border-slate-300 text-sm">
-				<h2 className="text-lg font-medium mb-2">Additional Details</h2>
-				<p className="">
+				<h2 className="font-medium mb-2">Additional Details</h2>
+				<p className="text-sm">
 					This transaction was part of a larger batch of transfers to
 					various wallets. The overall batch was successful and all
 					transfers were confirmed within the same block.
