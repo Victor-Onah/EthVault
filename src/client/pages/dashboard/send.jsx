@@ -56,7 +56,7 @@ const Send = () => {
 						break;
 					case 404:
 						toast.error(
-							"The account you wish to transfer to does not exist on this platform. Please check the email and try again."
+							"The account you wish to transfer to does not exist on this platform. Please ensure the email address is correct or try creating a new account with the email."
 						);
 						break;
 					default:
