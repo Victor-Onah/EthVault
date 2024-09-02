@@ -16,17 +16,27 @@ const AccountSetupDashboard = () => {
 				Customers who have not setup their account may not be able to
 				send or receive funds.
 			</p>
-			<div className="h-1 bg-blue-300 rounded-full">
-				<div
-					className={`${
-						state.user.setup.pin &&
-						!state.user.setup.email &&
-						"w-1/3"
-					} ${
-						state.user.setup.email &&
-						!!state.user.setup.deposit &&
-						"w-2/3"
-					} h-full bg-blue-900`}></div>
+			<div className="flex gap-4 items-center">
+				<div className="h-1 bg-blue-300 rounded-full flex-1">
+					<div
+						className={`${
+							state.user.setup.pin &&
+							!state.user.setup.email &&
+							"w-1/3"
+						} ${
+							state.user.setup.email &&
+							!state.user.setup.deposit &&
+							"w-2/3"
+						} h-full bg-blue-900`}></div>
+				</div>
+				<span className="font-semibold">
+					{state.user.setup.pin && !state.user.setup.deposit
+						? 1
+						: state.user.setup.pin && state.user.setup.deposit
+						? 2
+						: 0}
+					/3
+				</span>
 			</div>
 			<Link
 				to="./setup"

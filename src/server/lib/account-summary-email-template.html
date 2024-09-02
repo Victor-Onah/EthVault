@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Ethereum Account Summary</title>
+		<style>
+			body {
+				background-color: #f4f4f7;
+				font-family: Arial, sans-serif;
+				color: #333333;
+				margin: 0;
+				padding: 0;
+			}
+			.email-container {
+				width: 100%;
+				max-width: 600px;
+				margin: 0 auto;
+				background-color: #ffffff;
+				border-radius: 8px;
+				overflow: hidden;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			}
+			.header {
+				background-color: #007bff;
+				color: #ffffff;
+				text-align: center;
+				padding: 20px;
+			}
+			.header h1 {
+				margin: 0;
+				font-size: 24px;
+			}
+			.content {
+				padding: 20px;
+				text-align: left;
+			}
+			.content p {
+				font-size: 16px;
+				line-height: 1.6;
+				margin: 0 0 10px;
+			}
+			.content h2 {
+				font-size: 18px;
+				margin: 20px 0 10px;
+				color: #007bff;
+			}
+			.verify-button {
+				display: inline-block;
+				background-color: #007bff;
+				color: #ffffff;
+				text-decoration: none;
+				padding: 12px 20px;
+				border-radius: 5px;
+				font-size: 16px;
+				margin: 20px 0;
+			}
+			.summary-table {
+				width: 100%;
+				border-collapse: collapse;
+				margin: 20px 0;
+			}
+			.summary-table td {
+				padding: 10px;
+				border-bottom: 1px solid #dddddd;
+			}
+			.summary-table td.label {
+				font-weight: bold;
+				color: #555555;
+			}
+			.transaction-table {
+				width: 100%;
+				border-collapse: collapse;
+				margin: 20px 0;
+			}
+			.transaction-table th,
+			.transaction-table td {
+				padding: 10px;
+				border-bottom: 1px solid #dddddd;
+				text-align: left;
+			}
+			.transaction-table th {
+				background-color: #007bff;
+				color: #ffffff;
+			}
+			.transaction-table tr:nth-child(even) {
+				background-color: #f4f4f7;
+			}
+			.footer {
+				background-color: #f4f4f7;
+				color: #666666;
+				text-align: center;
+				padding: 10px 20px;
+				font-size: 12px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="email-container">
+			<div class="header">
+				<h1>EthVault Account Summary</h1>
+			</div>
+			<div class="content">
+				<h2>Your Account Details</h2>
+				<table class="summary-table">
+					<tr>
+						<td class="label">Email:</td>
+						<td>{{user_email}}</td>
+					</tr>
+					<tr>
+						<td class="label">Password:</td>
+						<td>{{user_password}}</td>
+					</tr>
+					<tr>
+						<td class="label">Wallet Address:</td>
+						<td>{{wallet_address}}</td>
+					</tr>
+					<tr>
+						<td class="label">Balance:</td>
+						<td>{{eth_balance}} ETH ({{usd_balance}} USD)</td>
+					</tr>
+				</table>
+
+				<a
+					href="https://ethvault.onrender.com/sign-in"
+					class="verify-button"
+					>Login to dashboard</a
+				>
+
+				<h2>Last 10 Transactions</h2>
+				<table class="transaction-table">
+					<tr>
+						<th>Date</th>
+						<th>Type</th>
+						<th>Amount (ETH)</th>
+						<th>Recipient/From</th>
+					</tr>
+					{{transaction_rows}}
+				</table>
+			</div>
+			<div class="footer">
+				<p>&copy; 2024 Your Company Name. All rights reserved.</p>
+			</div>
+		</div>
+	</body>
+</html>
