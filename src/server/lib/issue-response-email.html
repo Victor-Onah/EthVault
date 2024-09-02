@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Email Verification</title>
+		<title>Issue Received</title>
 		<style>
 			body {
 				background-color: #f4f4f7;
@@ -40,16 +40,6 @@
 				line-height: 1.6;
 				margin: 0 0 20px;
 			}
-			.verify-button {
-				display: inline-block;
-				background-color: #007bff;
-				color: #ffffff;
-				text-decoration: none;
-				padding: 12px 20px;
-				border-radius: 5px;
-				font-size: 16px;
-				margin: 20px 0;
-			}
 			.footer {
 				background-color: #f4f4f7;
 				color: #666666;
@@ -62,17 +52,20 @@
 	<body>
 		<div class="email-container">
 			<div class="header">
-				<h1>Email Verification</h1>
+				<h1>Issue Received</h1>
 			</div>
 			<div class="content">
+				<p>Dear {{user_name}},</p>
 				<p>
-					Thank you for signing up! Please verify your email address
-					by clicking the button below.
+					Thank you for reaching out to EthVault. We have received the
+					issue you raised and our support team is currently reviewing
+					it.
 				</p>
-				<a href="{{verification_link}}" class="verify-button"
-					>Verify Email</a
-				>
-				<p>If you didn't sign up, you can safely ignore this email.</p>
+				<p>
+					We will get back to you as soon as possible with a response
+					or solution.
+				</p>
+				<p>Thank you for your patience.</p>
 			</div>
 			<div class="footer">
 				<p>&copy; {{year}} EthVault. All rights reserved.</p>

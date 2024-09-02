@@ -20,6 +20,7 @@ import DashboardNotFound from "./pages/dashboard/not-found";
 import ResetPassword from "./pages/dashboard/reset/password";
 import ResetEmail from "./pages/dashboard/reset/email";
 import Setup from "./pages/dashboard/setup";
+import SupportPage from "./pages/dashboard/support";
 
 export const AppContext = createContext(null);
 
@@ -116,6 +117,10 @@ function App() {
 						{
 							path: "/dashboard/profile",
 							element: <Profile />
+						},
+						{
+							path: "/dashboard/support",
+							element: <SupportPage />
 						},
 						{
 							path: "/dashboard/*",

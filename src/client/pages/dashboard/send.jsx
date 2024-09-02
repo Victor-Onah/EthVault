@@ -37,9 +37,11 @@ const Send = () => {
 
 							text === "balance_insufficient"
 								? toast.error(
-										"Transaction could not be completed due to insufficient funds."
+										"The transaction could not be completed due to insufficient funds."
 								  )
-								: toast.error("Incorrect transaction PIN.");
+								: toast.error(
+										"Invalid transaction PIN. Please check your input and try again."
+								  );
 						}
 						break;
 					case 403:
@@ -50,13 +52,17 @@ const Send = () => {
 										"Transferring funds to your own account is not allowed."
 								  )
 								: toast.error(
-										"The account you are trying to transfer to has not yet been set up to receive funds from other users on this platform. If you are the owner, please complete the setup process."
+										"The account you are trying to transfer to has not yet been set up to receive funds from other users on this platform. If you are the owner, please login to your account to complete the setup process.",
+										{
+											duration: 20_000
+										}
 								  );
 						}
 						break;
 					case 404:
 						toast.error(
-							"The account you wish to transfer to does not exist on this platform. Try creating a new account with the email or ensure the email address is correct."
+							"The account you wish to transfer to does not exist on this platform. Try creating a new account with the email or ensure the email address is correct.",
+							{ duration: 15_000 }
 						);
 						break;
 					default:

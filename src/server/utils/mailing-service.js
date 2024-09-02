@@ -20,6 +20,10 @@ class Mailer {
 				"{{verification_link}}",
 				`https://ethvault.onrender.com/api/user/verify?email=${email}`
 			);
+			emailTemplate = emailTemplate.replace(
+				"{{year}}",
+				new Date().getFullYear()
+			);
 
 			const response = await fetch(
 				"https://api.brevo.com/v3/smtp/email",
@@ -49,7 +53,7 @@ class Mailer {
 		}
 	}
 
-	static async sendAccountSummary({ to }) {
+	static async sendAccountSummary({ email }) {
 		try {
 			await mongoose.connect(process.env.DB_URL);
 
@@ -109,6 +113,10 @@ class Mailer {
 				"{{transaction_rows}}",
 				lastTransactions.join("")
 			);
+			emailTemplate = emailTemplate.replace(
+				"{{year}}",
+				new Date().getFullYear()
+			);
 
 			// Send the email
 			const mailResponse = await fetch(
@@ -120,7 +128,7 @@ class Mailer {
 							name: "EthVault",
 							email: "victor.onah@atrizult.com"
 						},
-						to: [{ email: to }],
+						to: [{ email }],
 						subject: "Ethereum Account Summary",
 						htmlContent: emailTemplate
 					}),
@@ -135,9 +143,47 @@ class Mailer {
 
 			return true;
 		} catch (error) {
-			console.log(error);
 			return false;
 		}
+	}
+
+	static async sendIssueReceiptConfirmationEmail({ email, name }) {
+		let emailTemplate = await readFile(
+			resolve(
+				process.cwd(),
+				"./src/server/lib/issue-response-email.html"
+			),
+			"utf-8"
+		);
+		emailTemplate = emailTemplate.replace(
+			"{{user_name}}",
+			name.split(" ")[0]
+		);
+		emailTemplate = emailTemplate.replace(
+			"{{year}}",
+			new Date().getFullYear()
+		);
+
+		const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+			method: "POST",
+			body: JSON.stringify({
+				sender: {
+					name: "EthVault",
+					email: "victor.onah@atrizult.com"
+				},
+				to: [{ email }],
+				subject: "We received your issue",
+				htmlContent: emailTemplate
+			}),
+			headers: {
+				"api-key": process.env.API_KEY,
+				"Content-Type": "application/json"
+			}
+		});
+
+		if (!response.ok) return false;
+
+		return true;
 	}
 }
 

@@ -7,6 +7,9 @@ import User from "./model/user.js";
 import cookieParser from "cookie-parser";
 import Mailer from "./utils/mailing-service.js";
 // import { baseUser } from "./utils/default.js";
+import formidable from "formidable";
+import Issue from "./model/issue.js";
+import { readFile } from "fs/promises";
 
 config();
 
@@ -221,7 +224,38 @@ app.post("/api/user/setup/pin", authMiddleware, async (req, res) => {
 
 		res.end();
 	} catch (error) {
-		console.log(error);
+		res.status(500).end();
+	}
+});
+
+app.post("/api/user/issue", authMiddleware, async (req, res) => {
+	try {
+		const requestParser = formidable({});
+
+		const [fields, files] = await requestParser.parse(req);
+
+		const issue = new Issue({
+			userEmail: req.email,
+			description: fields.description[0],
+			images: []
+		});
+
+		if (files.images) {
+			for (let image of files.images) {
+				const imageString = await readFile(image.filepath, "base64");
+
+				issue.images.push(imageString);
+			}
+		}
+
+		await issue.save();
+		await Mailer.sendIssueReceiptConfirmationEmail({
+			email: req.email,
+			name: fields.name[0]
+		});
+
+		res.status(201).end();
+	} catch (error) {
 		res.status(500).end();
 	}
 });
