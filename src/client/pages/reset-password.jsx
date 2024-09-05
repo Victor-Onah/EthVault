@@ -80,7 +80,7 @@ const ResetPasswordNoAuth = () => {
 			navigate("/forgot-password")
 		);
 
-	if (Date.now() - new Date(Number(timestamp)).getDate() > 60_000 * 5)
+	if (Date.now() - new Date(Number(timestamp)).getTime() > 60_000 * 5)
 		return toast.error("Link expired."), navigate("/forgot-password");
 
 	return (
