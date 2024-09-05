@@ -32,7 +32,7 @@ const AccountSetupDashboard = () => {
 				<span className="font-semibold">
 					{state.user.setup.pin && !state.user.setup.deposit
 						? 1
-						: state.user.setup.pin && state.user.setup.deposit
+						: state.user.setup.pin && state.user.setup.email
 						? 2
 						: 0}
 					/3
