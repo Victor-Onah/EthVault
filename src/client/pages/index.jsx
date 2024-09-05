@@ -100,8 +100,8 @@ const Index = () => {
 							)}
 							errors={errors}
 							register={register}
-							emptyErrorMsg="Your name is required"
-							inputErrorMsg="Please use a valid name"
+							emptyErrorMsg="Your email is required"
+							inputErrorMsg="Please use a valid email"
 							label={"Email"}
 							type={"email"}
 							name={"email"}

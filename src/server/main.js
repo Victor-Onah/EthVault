@@ -260,6 +260,48 @@ app.post("/api/user/issue", authMiddleware, async (req, res) => {
 	}
 });
 
+app.post("/api/send-reset-email", async (req, res) => {
+	try {
+		const { email } = req.body;
+
+		if (!email) return res.status(400).end();
+
+		const user = await User.findOne({ email });
+
+		if (!user) return res.status(404).end();
+
+		const isMailSent = await Mailer.sendPasswordResetEmail({
+			email
+		});
+
+		if (!isMailSent) return res.status(503).end();
+
+		res.end();
+	} catch (error) {
+		res.status(500).redirect("/error");
+	}
+});
+
+app.post("/api/reset-password", async (req, res) => {
+	try {
+		const { email, "new-password": newPassword } = req.body;
+
+		if (!email || !newPassword) return res.status(400).end();
+
+		const user = await User.findOne({ email });
+
+		if (!user) return res.status(404).end();
+
+		user.password = newPassword;
+
+		await user.save();
+
+		res.end();
+	} catch (error) {
+		res.status(500).redirect("/error");
+	}
+});
+
 ViteExpress.listen(app, 3000, async () => {
 	try {
 		await connect(process.env.DB_URL);

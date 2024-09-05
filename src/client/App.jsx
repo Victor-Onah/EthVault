@@ -21,6 +21,8 @@ import ResetPassword from "./pages/dashboard/reset/password";
 import ResetEmail from "./pages/dashboard/reset/email";
 import Setup from "./pages/dashboard/setup";
 import SupportPage from "./pages/dashboard/support";
+import ForgotPassword from "./pages/forgot-password";
+import ResetPasswordNoAuth from "./pages/reset-password";
 
 export const AppContext = createContext(null);
 
@@ -135,6 +137,14 @@ function App() {
 				{
 					path: "/privacy",
 					element: <PrivacyPolicy />
+				},
+				{
+					path: "/forgot-password",
+					element: <ForgotPassword />
+				},
+				{
+					path: "/reset-password",
+					element: <ResetPasswordNoAuth />
 				},
 				{
 					path: "/*",

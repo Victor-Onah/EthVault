@@ -42,7 +42,7 @@ const VerificationEmail = () => {
 	}, []);
 
 	return (
-		<div className="bg-white bg-opacity-20 backdrop-blur-md border border-slate-300 p-4 rounded-lg text-center space-y-4 text-sm w-full max-w-80">
+		<div className="bg-white bg-opacity-20 backdrop-blur-md border border-slate-300 p-4 rounded-lg text-center space-y-4 text-sm w-full max-w-80 m-auto">
 			<Helmet>
 				<title>
 					{mailSent && !sendingEmail

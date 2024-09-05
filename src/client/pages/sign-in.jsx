@@ -34,7 +34,9 @@ const SignIn = () => {
 						);
 						break;
 					case 401:
-						toast.error();
+						toast.error(
+							"Incorrect email or password. Please check your inputs and try again."
+						);
 						break;
 					default:
 						toast.error(
@@ -55,14 +57,13 @@ const SignIn = () => {
 		<main className="auth min-h-screen bg-blue-900 text-slate-50 flex items-center justify-center p-4 flex-col gap-8">
 			<Helmet>
 				<title>EthVault - Sign In</title>
-				<meta name="description" content="" />
 			</Helmet>
 			<Logo />
 			<div className="bg-slate-50 bg-opacity-10 backdrop-blur-md p-4 shadow-inner w-full max-w-96 rounded-md space-y-6">
 				<div>
 					<h1 className="text-center text-2xl font-bold">Sign In</h1>
 					<p className="text-center text-sm">
-						Login to your account to continue
+						Login to your account to continue.
 					</p>
 				</div>
 				<form
@@ -74,8 +75,8 @@ const SignIn = () => {
 						)}
 						errors={errors}
 						register={register}
-						emptyErrorMsg="Your name is required"
-						inputErrorMsg="Please use a valid name"
+						emptyErrorMsg="Your email is required"
+						inputErrorMsg="Please use a valid email"
 						label={"Email"}
 						type={"email"}
 						name={"email"}
@@ -114,7 +115,7 @@ const SignIn = () => {
 				</p>
 				<p>
 					Forgot password?{" "}
-					<Link to={"/reset"} className="underline">
+					<Link to={"/forgot-password"} className="underline">
 						Reset
 					</Link>
 				</p>

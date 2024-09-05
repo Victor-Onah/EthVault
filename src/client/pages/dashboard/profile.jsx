@@ -14,7 +14,7 @@ const Profile = () => {
 	return (
 		<div className="p-4 space-y-6">
 			<Helmet>
-				<title>Profile</title>
+				<title>EthVault - Profile</title>
 			</Helmet>
 			<h1 className="text-2xl font-bold text-center">Profile</h1>
 			<div className="text-sm space-y-2">

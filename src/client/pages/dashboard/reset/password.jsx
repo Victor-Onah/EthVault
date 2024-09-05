@@ -121,7 +121,7 @@ const ResetPassword = () => {
 						pattern={RegExp(/^[^\s)]{6,}$/)}
 						errors={errors}
 						register={register}
-						emptyErrorMsg="Enter current password"
+						emptyErrorMsg="Enter new password"
 						inputErrorMsg="Password must be at least six characters long"
 						label={"New password"}
 						type={"password"}

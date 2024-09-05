@@ -18,7 +18,7 @@ class Mailer {
 			);
 			emailTemplate = emailTemplate.replace(
 				"{{verification_link}}",
-				`https://ethvault.onrender.com/api/user/verify?email=${email}`
+				`/reset-password/api/user/verify?email=${email}`
 			);
 			emailTemplate = emailTemplate.replace(
 				"{{year}}",
@@ -148,42 +148,95 @@ class Mailer {
 	}
 
 	static async sendIssueReceiptConfirmationEmail({ email, name }) {
-		let emailTemplate = await readFile(
-			resolve(
-				process.cwd(),
-				"./src/server/lib/issue-response-email.html"
-			),
-			"utf-8"
-		);
-		emailTemplate = emailTemplate.replace(
-			"{{user_name}}",
-			name.split(" ")[0]
-		);
-		emailTemplate = emailTemplate.replace(
-			"{{year}}",
-			new Date().getFullYear()
-		);
+		try {
+			let emailTemplate = await readFile(
+				resolve(
+					process.cwd(),
+					"./src/server/lib/issue-response-email.html"
+				),
+				"utf-8"
+			);
+			emailTemplate = emailTemplate.replace(
+				"{{user_name}}",
+				name.split(" ")[0]
+			);
+			emailTemplate = emailTemplate.replace(
+				"{{year}}",
+				new Date().getFullYear()
+			);
 
-		const response = await fetch("https://api.brevo.com/v3/smtp/email", {
-			method: "POST",
-			body: JSON.stringify({
-				sender: {
-					name: "EthVault",
-					email: "victor.onah@atrizult.com"
-				},
-				to: [{ email }],
-				subject: "We received your issue",
-				htmlContent: emailTemplate
-			}),
-			headers: {
-				"api-key": process.env.API_KEY,
-				"Content-Type": "application/json"
-			}
-		});
+			const response = await fetch(
+				"https://api.brevo.com/v3/smtp/email",
+				{
+					method: "POST",
+					body: JSON.stringify({
+						sender: {
+							name: "EthVault",
+							email: "victor.onah@atrizult.com"
+						},
+						to: [{ email }],
+						subject: "We received your issue",
+						htmlContent: emailTemplate
+					}),
+					headers: {
+						"api-key": process.env.API_KEY,
+						"Content-Type": "application/json"
+					}
+				}
+			);
 
-		if (!response.ok) return false;
+			if (!response.ok) return false;
 
-		return true;
+			return true;
+		} catch (error) {
+			return false;
+		}
+	}
+
+	static async sendPasswordResetEmail({ email }) {
+		try {
+			let emailTemplate = await readFile(
+				resolve(
+					process.cwd(),
+					"./src/server/lib/reset-password-email-template.html"
+				),
+				"utf-8"
+			);
+			emailTemplate = emailTemplate.replace(
+				"{{reset_link}}",
+				`https://ethvault.onrender.com/reset-password?email=${email}&ts=${Date.now()}`
+			);
+			emailTemplate = emailTemplate.replace(
+				"{{year}}",
+				new Date().getFullYear()
+			);
+
+			const response = await fetch(
+				"https://api.brevo.com/v3/smtp/email",
+				{
+					method: "POST",
+					body: JSON.stringify({
+						sender: {
+							name: "EthVault",
+							email: "victor.onah@atrizult.com"
+						},
+						to: [{ email }],
+						subject: "Reset Your EthVault Password",
+						htmlContent: emailTemplate
+					}),
+					headers: {
+						"api-key": process.env.API_KEY,
+						"Content-Type": "application/json"
+					}
+				}
+			);
+
+			if (!response.ok) return false;
+
+			return true;
+		} catch (error) {
+			return false;
+		}
 	}
 }
 

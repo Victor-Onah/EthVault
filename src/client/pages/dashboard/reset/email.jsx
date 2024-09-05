@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import SubmitBtn from "../../../components/button";
 import Input from "../../../components/input";
 import { Helmet } from "react-helmet";
-import { toast, useSonner } from "sonner";
+import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AppContext } from "../../../App";
@@ -120,7 +120,7 @@ const ResetEmail = () => {
 						)}
 						errors={errors}
 						register={register}
-						emptyErrorMsg="Enter current email"
+						emptyErrorMsg="Enter new email"
 						inputErrorMsg="email must be at least six characters long"
 						label={"New email"}
 						type={"email"}
