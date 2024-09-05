@@ -30,7 +30,7 @@ const AccountSetupDashboard = () => {
 						} h-full bg-blue-900`}></div>
 				</div>
 				<span className="font-semibold">
-					{state.user.setup.pin && !state.user.setup.deposit
+					{state.user.setup.pin && !state.user.setup.email
 						? 1
 						: state.user.setup.pin && state.user.setup.email
 						? 2
