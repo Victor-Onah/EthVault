@@ -13,7 +13,10 @@ class Mailer {
 	static async sendVerificationMail({ email }) {
 		try {
 			let emailTemplate = await readFile(
-				resolve(process.cwd(), "./src/server/lib/email-template.html"),
+				resolve(
+					process.cwd(),
+					"./src/server/lib/account-verification-email-template.html"
+				),
 				"utf-8"
 			);
 			emailTemplate = emailTemplate.replace(
@@ -206,6 +209,7 @@ class Mailer {
 				"{{reset_link}}",
 				`https://ethvault.onrender.com/reset-password?email=${email}&ts=${Date.now()}`
 			);
+			emailTemplate = emailTemplate.replace("{{user_email}}", email);
 			emailTemplate = emailTemplate.replace(
 				"{{year}}",
 				new Date().getFullYear()

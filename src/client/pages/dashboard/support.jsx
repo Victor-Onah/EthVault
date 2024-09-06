@@ -70,19 +70,23 @@ const SupportPage = () => {
 
 	const handleImageUpload = e =>
 		setImages(prev => {
-			for (let url of prev) {
-				URL.revokeObjectURL(url);
+			if (e.target.files.length > 0) {
+				for (let url of prev) {
+					URL.revokeObjectURL(url);
+				}
+
+				let urls = [];
+
+				for (let file of e.target.files) {
+					const url = URL.createObjectURL(file);
+
+					urls.push(url);
+				}
+
+				return urls;
+			} else {
+				return prev;
 			}
-
-			let urls = [];
-
-			for (let file of e.target.files) {
-				const url = URL.createObjectURL(file);
-
-				urls.push(url);
-			}
-
-			return urls;
 		});
 
 	return (
