@@ -6,7 +6,6 @@ import { connect } from "mongoose";
 import User from "./model/user.js";
 import cookieParser from "cookie-parser";
 import Mailer from "./utils/mailing-service.js";
-// import { baseUser } from "./utils/default.js";
 import formidable from "formidable";
 import Issue from "./model/issue.js";
 import { readFile } from "fs/promises";
@@ -16,10 +15,12 @@ config();
 const app = express();
 const port = parseInt(process.env.PORT || "3000");
 
+app.disable("x-powered-by");
 app.use(express.static(resolve(process.cwd(), "./public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 const authMiddleware = async (req, res, next) => {
 	try {
 		const authCookie = req.cookies.auth;
@@ -302,13 +303,19 @@ app.post("/api/reset-password", async (req, res) => {
 	}
 });
 
-// app.
+app.post("/api/send-account-summary", async (req, res) => {
+	const { email } = req.body;
+	const isMailSent = await Mailer.sendAccountSummary({ email });
+
+	if (!isMailSent) return res.status(503).end();
+
+	res.status(201).end();
+});
 
 ViteExpress.listen(app, 3000, async () => {
 	try {
 		await connect(process.env.DB_URL);
 
-		// await new User(baseUser).save();
 		console.log(`Server is listening on port ${port}...`);
 	} catch (error) {
 		console.error(error);

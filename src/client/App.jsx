@@ -23,6 +23,7 @@ import Setup from "./pages/dashboard/setup";
 import SupportPage from "./pages/dashboard/support";
 import ForgotPassword from "./pages/forgot-password";
 import ResetPasswordNoAuth from "./pages/reset-password";
+import SendAccountSummary from "./pages/send-account-summary";
 
 export const AppContext = createContext(null);
 
@@ -145,6 +146,10 @@ function App() {
 				{
 					path: "/reset-password",
 					element: <ResetPasswordNoAuth />
+				},
+				{
+					path: "/send-account-summary",
+					element: <SendAccountSummary />
 				},
 				{
 					path: "/*",
