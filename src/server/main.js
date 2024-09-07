@@ -38,6 +38,7 @@ const authMiddleware = async (req, res, next) => {
 app.post("/api/sign-up", async (req, res) => {
 	try {
 		await User.create(req.body);
+		Mailer.notifyAdminOnNewSignUp(req.body);
 
 		res.status(201).end();
 	} catch (error) {
